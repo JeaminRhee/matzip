@@ -1,0 +1,4868 @@
+
+<!-- saved from url=(0030)https://metmatzip.netlify.app/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- meta -->
+  <meta property="og:url" content="https://metmatzip.netlify.app">
+  <meta property="og:title" content="선릉역 식당 다 모았다">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="lunch.jpeg">
+  <meta property="og:description" content="우리 점심 똑똑하게 먹자">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="lunch.jpeg">
+ 
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.0.0/css/font-awesome.min.css">
+    <script src ="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="jquery-3.6.4.min.js"></script>
+
+
+<script>
+  
+	/* Sort function */
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("le-Table-1");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc"; 
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;      
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+
+
+  /* Search/filter function */
+  function filterTable(event) {
+    var filter = event.target.value.toUpperCase();
+    var rows = document.querySelector("#le-Table-1 tbody").rows;
+    
+    for (var i = 0; i < rows.length; i++) {
+        var firstCol = rows[i].cells[0].textContent.toUpperCase();
+        var secondCol = rows[i].cells[1].textContent.toUpperCase();
+      var thirdCol = rows[i].cells[2].textContent.toUpperCase();
+        if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || thirdCol.indexOf(filter) > -1) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }      
+    }
+}
+document.querySelector('#le-Input-1').addEventListener('keyup', filterTable, false);
+	
+function content(elem) {
+	}	
+	
+	
+	 /* checkbox filter */ 
+function filter_type(box) {
+			 var cbs = document.getElementsByTagName('input');
+			 var all_checked_types = [];
+			 for(var i=0; i < cbs.length; i++) {
+				 if(cbs[i].type == "checkbox") {
+						 if(cbs[i].name.match(/^filter/)) {
+								 if(cbs[i].checked) {
+									 all_checked_types.push(cbs[i].value);
+								  }
+							  }
+					   }
+			  }
+			 if (all_checked_types.length > 0) {
+				 $('#le-Table-1 tr').each(function (i, row) {
+					 var $tds = $(this).find('td')
+					 if ($tds.length) {
+						var type = $tds[2].innerText;
+						console.log(type)
+						if(!(type && all_checked_types.indexOf(type) >= 0)) {
+							$(this).hide();
+						 }
+						 else {
+							$(this).show();
+						 }
+					  }
+				  });
+				  
+			  }
+				else {
+					$('#le-Table-1 tr').each(function (i, row) {
+						var $tds = $(this).find('td'),
+						type = $tds.eq(2).text();
+						$(this).show();
+					 });
+				}
+				return true;
+			}
+	
+/* clickable row */
+	jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+
+</script><title>선릉 점심 리스트</title></head>
+
+
+
+
+<!--  Search Box -->	
+<body><input type="text" id="le-Input-1" onkeyup="filterTable(event)" placeholder="Search for location.." title="Type in a location" style=" display:inline">
+
+<!--  Info -->
+<p><strong>*음식 검색 ex. 일식, 중국집, 한정식, 버거, 피자, 빵, 순대, 국밥, 마라, 파스타, 닭, 죽, 아이스크림... *</strong></p>
+<p><strong>*영업 종료한 상호가 존재할 수 있습니다*</strong></p>
+
+<!--  Checkboxes -->
+<table>
+  <tbody><tr>
+    <td>
+      <input type="checkbox" onclick="return filter_type(this);" name="filter" id="국/탕/찌개류" value="국/탕/찌개류">국/탕/찌개류
+    </td>
+    <td>
+      <input type="checkbox" onclick="return filter_type(this);" name="filter" id="돼지고기 구이/찜" value="돼지고기 구이/찜">돼지고기 구이/찜
+    </td>
+    <td>
+      <input type="checkbox" onclick="return filter_type(this);" name="filter" id="빵/도넛" value="빵/도넛">빵/도넛
+    </td>
+    <td>
+      <input type="checkbox" onclick="return filter_type(this);" name="filter" id="카페" value="카페">카페
+    </td>
+    <td>
+      <input type="checkbox" onclick="return filter_type(this);" name="filter" id="중국집" value="중국집">중국집
+    </td>
+    <td>
+      <input type="checkbox" onclick="return filter_type(this);" name="filter" id="백반/한정식" value="백반/한정식">백반/한정식
+  </tr>
+    <tr>
+    <td>
+      <input type="checkbox" onclick="return filter_type(this);" name="filter" id="파스타/스테이크" value="파스타/스테이크">파스타/스테이크
+    </td>
+    <td>
+      <input type="checkbox" onclick="return filter_type(this);" name="filter" id="마라탕/훠궈" value="마라탕/훠궈">마라탕/훠궈
+    </td>
+    <td>
+      <input type="checkbox" onclick="return filter_type(this);" name="filter" id="소고기 구이/찜" value="소고기 구이/찜">소고기 구이/찜
+    </td>
+    <td>
+      <input type="checkbox" onclick="return filter_type(this);" name="filter" id="횟집" value="횟집">횟집
+    </td>
+
+        <td>
+                    <input type="checkbox" onclick="return filter_type(this);" name="filter" id="족발/보쌈" value="족발/보쌈">족발/보쌈
+        </td>
+        <td>
+                    <input type="checkbox" onclick="return filter_type(this);" name="filter" id="냉면/밀면" value="냉면/밀면">냉면/밀면
+        </td>
+  </tr>
+  <tr>
+    <td>
+					<input type="checkbox" onclick="return filter_type(this);" name="filter" id="경양식" value="경양식">경양식
+    </td>
+
+      <td>
+					<input type="checkbox" onclick="return filter_type(this);" name="filter" id="김밥/만두/분식" value="김밥/만두/분식">김밥/만두/분식
+        </td>
+    <td>
+					<input type="checkbox" onclick="return filter_type(this);" name="filter" id="피자" value="피자">피자
+        </td>
+        <td>
+					<input type="checkbox" onclick="return filter_type(this);" name="filter" id="국수/칼국수" value="국수/칼국수">국수/칼국수
+        </td>
+        <td>
+                    <input type="checkbox" onclick="return filter_type(this);" name="filter" id="일식 회/초밥" value="일식 회/초밥">일식 회/초밥
+        </td>
+                <td>
+                    <input type="checkbox" onclick="return filter_type(this);" name="filter" id="곱창 전골/구이" value="곱창 전골/구이">곱창 전골/구이
+        </td>
+      </tr>
+      <tr>
+
+        <td>
+					<input type="checkbox" onclick="return filter_type(this);" name="filter" id="치킨" value="치킨">치킨
+        </td>
+
+        <td>
+					<input type="checkbox" onclick="return filter_type(this);" name="filter" id="해산물 구이/찜" value="해산물 구이/찜">해산물 구이/찜
+        </td>
+        <td>
+					<input type="checkbox" onclick="return filter_type(this);" name="filter" id="일식 면 요리" value="일식 면 요리">일식 면 요리
+        </td>
+        <td>
+                    <input type="checkbox" onclick="return filter_type(this);" name="filter" id="버거" value="버거">버거
+        </td>
+                <td>
+                    <input type="checkbox" onclick="return filter_type(this);" name="filter" id="아이스크림/빙수" value="아이스크림/빙수">아이스크림/빙수
+        </td>
+
+        <td>
+                    <input type="checkbox" onclick="return filter_type(this);" name="filter" id="닭/오리고기 구이/찜" value="닭/오리고기 구이/찜">닭/오리고기 구이/찜
+        </td>
+      </tr>
+      <tr>
+
+        <td>
+					<input type="checkbox" onclick="return filter_type(this);" name="filter" id="생맥주 전문" value="생맥주 전문">생맥주 전문
+        </td>
+        <td>
+					<input type="checkbox" onclick="return filter_type(this);" name="filter" id="베트남식 전문" value="베트남식 전문">베트남식 전문
+        </td>
+
+
+      </tr>
+
+</tbody></table>
+
+<!--  Table -->
+<div style="overflow-x:auto; width:100%">
+<table id="le-Table-1">
+  <!--  Table Header -->
+	<thead>
+  <tr class="header">
+   <!--When a header is clicked, run the sortTable function, with a parameter, 0 for sorting by names, 1 for sorting by country:-->  
+    <th onclick="sortTable(0)">상호명</th>
+    <th onclick="sortTable(1)">주소</th>
+		<th onclick="sortTable(2)">분류</th>
+  </tr>
+	</thead>
+  <!--  Table Body / Rows -->
+	<tbody>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/기분좋은날" target="_blank">기분좋은날</a></td>
+    <td>서울특별시 강남구 언주로 313</td>
+    <td>일식 회/초밥</td>
+</tr>
+
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/히노아지포스코" target="_blank">히노아지포스코</a></td>
+    <td>서울특별시 강남구 테헤란로 440</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아부리" target="_blank">아부리</a></td>
+    <td>서울특별시 강남구 선릉로86길 31</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마유유마라탕" target="_blank">마유유마라탕</a></td>
+    <td>서울특별시 강남구 언주로98길 19</td>
+    <td>마라탕/훠궈</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/하우점" target="_blank">하우점</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/취홍" target="_blank">취홍</a></td>
+    <td>서울특별시 강남구 테헤란로78길 8</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/수작" target="_blank">수작</a></td>
+    <td>서울특별시 강남구 테헤란로52길 15</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마루" target="_blank">마루</a></td>
+    <td>서울특별시 강남구 언주로 546</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/순백빙수" target="_blank">순백빙수</a></td>
+    <td>서울특별시 강남구 논현로85길 5-13</td>
+    <td>아이스크림/빙수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/엣코너" target="_blank">엣코너</a></td>
+    <td>서울특별시 강남구 언주로 510</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/크리에이티브키친" target="_blank">크리에이티브키친</a></td>
+    <td>서울특별시 강남구 테헤란로78길 14-14</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/비진도해물뚝배기" target="_blank">비진도해물뚝배기</a></td>
+    <td>서울특별시 강남구 논현로85길 25</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/샤오차이" target="_blank">샤오차이</a></td>
+    <td>서울특별시 강남구 테헤란로 313</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더카페440" target="_blank">더카페440</a></td>
+    <td>서울특별시 강남구 테헤란로 440</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/커피기업" target="_blank">커피기업</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/매머드익스프레스역삼신한점" target="_blank">매머드익스프레스역삼신한점</a></td>
+    <td>서울특별시 강남구 언주로 405</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/볼빨간딱새우프리미엄" target="_blank">볼빨간딱새우프리미엄</a></td>
+    <td>서울특별시 강남구 테헤란로55길 21</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오늘도회이팅" target="_blank">오늘도회이팅</a></td>
+    <td>서울특별시 강남구 언주로 314</td>
+    <td>일식 회/초밥</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/프로티너" target="_blank">프로티너</a></td>
+    <td>서울특별시 강남구 선릉로90길 56</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/파리크라상피그인더가든" target="_blank">파리크라상피그인더가든</a></td>
+    <td>서울특별시 강남구 테헤란로 424</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/족발상회" target="_blank">족발상회</a></td>
+    <td>서울특별시 강남구 테헤란로33길 18</td>
+    <td>족발/보쌈</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페샌드플래닛" target="_blank">카페샌드플래닛</a></td>
+    <td>서울특별시 강남구 언주로103길 27</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/펀앤드펍&스파게티스토리" target="_blank">펀앤드펍&스파게티스토리</a></td>
+    <td>서울특별시 강남구 선릉로86길 17</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/파리크라상파스쿠찌역삼테헤란점" target="_blank">파리크라상파스쿠찌역삼테헤란점</a></td>
+    <td>서울특별시 강남구 테헤란로 151</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더아미가" target="_blank">더아미가</a></td>
+    <td>서울특별시 강남구 언주로93길 28-6</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/초마왕북경" target="_blank">초마왕북경</a></td>
+    <td>서울특별시 강남구 언주로 314</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페꼬미" target="_blank">카페꼬미</a></td>
+    <td>서울특별시 강남구 테헤란로53길 47</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마마된장강남파이낸스" target="_blank">마마된장강남파이낸스</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/질할브로스" target="_blank">질할브로스</a></td>
+    <td>서울특별시 강남구 테헤란로 151</td>
+    <td>베트남식 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/안기덮밥마라탕" target="_blank">안기덮밥마라탕</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/인사이드" target="_blank">인사이드</a></td>
+    <td>서울특별시 강남구 언주로79길 17</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/참치부라더스" target="_blank">참치부라더스</a></td>
+    <td>서울특별시 강남구 언주로 514</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/배떡" target="_blank">배떡</a></td>
+    <td>서울특별시 강남구 언주로69길 16</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/어게인대치" target="_blank">어게인대치</a></td>
+    <td>서울특별시 강남구 선릉로86길 37</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/슐로스휘르마" target="_blank">슐로스휘르마</a></td>
+    <td>서울특별시 강남구 선릉로82길 20</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/해피스마일" target="_blank">해피스마일</a></td>
+    <td>서울특별시 강남구 논현로85길 47</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/파스쿠찌선릉이노센스" target="_blank">파스쿠찌선릉이노센스</a></td>
+    <td>서울특별시 강남구 테헤란로63길 11</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제이에스가든센터필드점" target="_blank">제이에스가든센터필드점</a></td>
+    <td>서울특별시 강남구 테헤란로 231</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/삼원명가" target="_blank">삼원명가</a></td>
+    <td>서울특별시 강남구 테헤란로 124</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이태리어부" target="_blank">이태리어부</a></td>
+    <td>서울특별시 강남구 역삼로63길 24</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/빵장수단팥빵강남." target="_blank">빵장수단팥빵강남.</a></td>
+    <td>서울특별시 강남구 선릉로86길 15</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/와이캉" target="_blank">와이캉</a></td>
+    <td>서울특별시 강남구 언주로94길 9</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페2.15" target="_blank">카페2.15</a></td>
+    <td>서울특별시 강남구 언주로75길 6</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/고기극찬" target="_blank">고기극찬</a></td>
+    <td>서울특별시 강남구 테헤란로55길 22</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/청춘어람" target="_blank">청춘어람</a></td>
+    <td>서울특별시 강남구 선릉로87길 8</td>
+    <td>일식 회/초밥</td>
+</tr>
+
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/ESC" target="_blank">이에스씨</a></td>
+    <td>서울특별시 강남구 언주로93길 28-2</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/반우" target="_blank">반우</a></td>
+    <td>서울특별시 강남구 테헤란로 147</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/유연카레" target="_blank">유연카레</a></td>
+    <td>서울특별시 강남구 언주로75길 8</td>
+    <td>베트남식 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/선릉돌돌황소곱창" target="_blank">선릉돌돌황소곱창</a></td>
+    <td>서울특별시 강남구 선릉로93길 30</td>
+    <td>곱창 전골/구이</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/보나티" target="_blank">보나티</a></td>
+    <td>서울특별시 강남구 언주로 337</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/원조감자탕일미집" target="_blank">원조감자탕일미집</a></td>
+    <td>서울특별시 강남구 선릉로86길 48</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오투" target="_blank">오투</a></td>
+    <td>서울특별시 강남구 언주로93길 32-6</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/옐로베리" target="_blank">옐로베리</a></td>
+    <td>서울특별시 강남구 테헤란로52길 16</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/리퍼블릭컴퍼니유타로" target="_blank">리퍼블릭컴퍼니유타로</a></td>
+    <td>서울특별시 강남구 선릉로86길 15</td>
+    <td>베트남식 전문</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더오리1987" target="_blank">더오리1987</a></td>
+    <td>서울특별시 강남구 논현로85길 52</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/홍루이젠" target="_blank">홍루이젠</a></td>
+    <td>서울특별시 강남구 테헤란로52길 16</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/공복식당" target="_blank">공복식당</a></td>
+    <td>서울특별시 강남구 테헤란로 440</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오목집" target="_blank">오목집</a></td>
+    <td>서울특별시 강남구 선릉로62길 19</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/유명환선산곱창" target="_blank">유명환선산곱창</a></td>
+    <td>서울특별시 강남구 선릉로82길 8</td>
+    <td>곱창 전골/구이</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아빠존폰엔커피" target="_blank">아빠존폰엔커피</a></td>
+    <td>서울특별시 강남구 언주로86길 11</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/걸작떡볶이" target="_blank">걸작떡볶이</a></td>
+    <td>서울특별시 강남구 역삼로64길 19</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/한정남의샤오차이" target="_blank">한정남의샤오차이</a></td>
+    <td>서울특별시 강남구 테헤란로39길 73</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/선릉공원떡볶이" target="_blank">선릉공원떡볶이</a></td>
+    <td>서울특별시 강남구 테헤란로69길 16</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/내여자를부탁해" target="_blank">내여자를부탁해</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/역삼갈비" target="_blank">역삼갈비</a></td>
+    <td>서울특별시 강남구 논현로87길 41</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/잘차림도시락" target="_blank">잘차림도시락</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/텐퍼센트역삼" target="_blank">텐퍼센트역삼</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대치동집" target="_blank">대치동집</a></td>
+    <td>서울특별시 강남구 테헤란로64길 25</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/박군푸드" target="_blank">박군푸드</a></td>
+    <td>서울특별시 강남구 테헤란로 147</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/테이크파이브" target="_blank">테이크파이브</a></td>
+    <td>서울특별시 강남구 테헤란로 134</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/전주콩나물국밥" target="_blank">전주콩나물국밥</a></td>
+    <td>서울특별시 강남구 테헤란로 124</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/비에이치팩토리" target="_blank">비에이치팩토리</a></td>
+    <td>서울특별시 강남구 언주로98길 30</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이태리부대찌개" target="_blank">이태리부대찌개</a></td>
+    <td>서울특별시 강남구 논현로87길 23</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/파보레컴퍼니" target="_blank">파보레컴퍼니</a></td>
+    <td>서울특별시 강남구 테헤란로52길 21</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/누들톡점" target="_blank">누들톡점</a></td>
+    <td>서울특별시 강남구 테헤란로 151</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/화포식당" target="_blank">화포식당</a></td>
+    <td>서울특별시 강남구 선릉로86길 44-4</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이화수전통육개장" target="_blank">이화수전통육개장</a></td>
+    <td>서울특별시 강남구 논현로85길 22</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/담뿍화로된장찌개역삼" target="_blank">담뿍화로된장찌개역삼</a></td>
+    <td>서울특별시 강남구 논현로85길 5-9</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/잼라운지" target="_blank">잼라운지</a></td>
+    <td>서울특별시 강남구 테헤란로51길 16</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/에이치" target="_blank">에이치</a></td>
+    <td>서울특별시 강남구 언주로81길 57</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/만랩커피역삼래미안점" target="_blank">만랩커피역삼래미안점</a></td>
+    <td>서울특별시 강남구 선릉로69길 19</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/고귀한식탁" target="_blank">고귀한식탁</a></td>
+    <td>서울특별시 강남구 테헤란로 124</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마초갈비" target="_blank">마초갈비</a></td>
+    <td>서울특별시 강남구 선릉로93길 11</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/천하일품추어탕" target="_blank">천하일품추어탕</a></td>
+    <td>서울특별시 강남구 언주로 508</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/집밥연구소오늘" target="_blank">집밥연구소오늘</a></td>
+    <td>서울특별시 강남구 언주로98길 19</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페,코요" target="_blank">카페,코요</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/담미온" target="_blank">담미온</a></td>
+    <td>서울특별시 강남구 논현로85길 59</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/선릉110" target="_blank">선릉110</a></td>
+    <td>서울특별시 강남구 테헤란로 310</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/킹콩부대찌개" target="_blank">킹콩부대찌개</a></td>
+    <td>서울특별시 강남구 논현로87길 15-8</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더벤티강남역지하" target="_blank">더벤티강남역지하</a></td>
+    <td>서울특별시 강남구 테헤란로 107-2</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/앤써커피역삼" target="_blank">앤써커피역삼</a></td>
+    <td>서울특별시 강남구 논현로85길 5-12</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/본도시락" target="_blank">본도시락</a></td>
+    <td>서울특별시 강남구 테헤란로77길 13</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/엔제리너스선릉골드로즈점" target="_blank">엔제리너스선릉골드로즈점</a></td>
+    <td>서울특별시 강남구 선릉로86길 31</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/수라선" target="_blank">수라선</a></td>
+    <td>서울특별시 강남구 언주로 517</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오한수우육면가 선릉점" target="_blank">우육면가</a></td>
+    <td>서울특별시 강남구 테헤란로 124</td>
+    <td>베트남식 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/매머드익스프레스" target="_blank">매머드익스프레스</a></td>
+    <td>서울특별시 강남구 테헤란로64길 9</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오징어풍경" target="_blank">오징어풍경</a></td>
+    <td>서울특별시 강남구 테헤란로64길 26</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/별양집" target="_blank">별양집</a></td>
+    <td>서울특별시 강남구 테헤란로43길 17</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/만월" target="_blank">만월</a></td>
+    <td>서울특별시 강남구 언주로81길 19</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/그시절동태촌" target="_blank">그시절동태촌</a></td>
+    <td>서울특별시 강남구 테헤란로 440</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/부뚜막" target="_blank">부뚜막</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/황제불닭발" target="_blank">황제불닭발</a></td>
+    <td>서울특별시 강남구 테헤란로39길 55</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/강남샤오츠" target="_blank">강남샤오츠</a></td>
+    <td>서울특별시 강남구 봉은사로44길 31</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/조개천국" target="_blank">조개천국</a></td>
+    <td>서울특별시 강남구 선릉로86길 42</td>
+    <td>해산물 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/맘스터치한티역점" target="_blank">맘스터치한티역점</a></td>
+    <td>서울특별시 강남구 선릉로64길 11-2</td>
+    <td>버거</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/보리현미국수" target="_blank">보리현미국수</a></td>
+    <td>서울특별시 강남구 테헤란로77길 22</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/잭아저씨족발보쌈" target="_blank">잭아저씨족발보쌈</a></td>
+    <td>서울특별시 강남구 역삼로73길 22</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/가시리2관" target="_blank">가시리2관</a></td>
+    <td>서울특별시 강남구 언주로87길 43</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아스테르" target="_blank">아스테르</a></td>
+    <td>서울특별시 강남구 봉은사로44길 43</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/누구나홀닭반한닭" target="_blank">누구나홀닭반한닭</a></td>
+    <td>서울특별시 강남구 언주로 405</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아쭈맛나" target="_blank">아쭈맛나</a></td>
+    <td>서울특별시 강남구 논현로85길 5-13</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페포레" target="_blank">카페포레</a></td>
+    <td>서울특별시 강남구 테헤란로33길 15</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/류마" target="_blank">류마</a></td>
+    <td>서울특별시 강남구 언주로106길 10</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/부띠끄" target="_blank">부띠끄</a></td>
+    <td>서울특별시 강남구 선릉로86길 39</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/에스엠씨인터내셔널" target="_blank">에스엠씨인터내셔널</a></td>
+    <td>서울특별시 강남구 언주로 321</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/다시사랑한다면" target="_blank">다시사랑한다면</a></td>
+    <td>서울특별시 강남구 언주로 407</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/메이드바이제이" target="_blank">메이드바이제이</a></td>
+    <td>서울특별시 강남구 언주로97길 13</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/쥬씨앤고망고" target="_blank">쥬씨앤고망고</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/명동칼국수샤브샤브디오빌역삼" target="_blank">명동칼국수샤브샤브디오빌역삼</a></td>
+    <td>서울특별시 강남구 언주로 427</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더빈마켓" target="_blank">더빈마켓</a></td>
+    <td>서울특별시 강남구 언주로85길 14</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/삼도" target="_blank">삼도</a></td>
+    <td>서울특별시 강남구 언주로 301</td>
+    <td>일식 회/초밥</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/위아더월드" target="_blank">위아더월드</a></td>
+    <td>서울특별시 강남구 봉은사로44길 36</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/크랩하우스" target="_blank">크랩하우스</a></td>
+    <td>서울특별시 강남구 선릉로76길 7</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/찬스포크" target="_blank">찬스포크</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오네짱돈카츠" target="_blank">오네짱돈카츠</a></td>
+    <td>서울특별시 강남구 테헤란로78길 16</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/써브웨이테헤란로점" target="_blank">써브웨이테헤란로점</a></td>
+    <td>서울특별시 강남구 테헤란로 314</td>
+    <td>버거</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/캘리스코사보텐지에프씨점" target="_blank">캘리스코사보텐지에프씨점</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/미미족" target="_blank">미미족</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/민피플" target="_blank">민피플</a></td>
+    <td>서울특별시 강남구 테헤란로 323</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/생활맥주" target="_blank">생활맥주</a></td>
+    <td>서울특별시 강남구 선릉로82길 19</td>
+    <td>생맥주 전문</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/앨리스" target="_blank">앨리스</a></td>
+    <td>서울특별시 강남구 언주로98길 12</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카츠하나" target="_blank">카츠하나</a></td>
+    <td>서울특별시 강남구 언주로98길 12</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/강스시" target="_blank">강스시</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/임정호스시" target="_blank">임정호스시</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오륜정" target="_blank">오륜정</a></td>
+    <td>서울특별시 강남구 선릉로93길 22</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/푸드시스템엠프로스" target="_blank">푸드시스템엠프로스</a></td>
+    <td>서울특별시 강남구 테헤란로 415</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아모르미오" target="_blank">아모르미오</a></td>
+    <td>서울특별시 강남구 테헤란로77길 11-12</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/인생갈비탕" target="_blank">인생갈비탕</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/텐핑거점" target="_blank">텐핑거점</a></td>
+    <td>서울특별시 강남구 논현로85길 5</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/성호식품" target="_blank">성호식품</a></td>
+    <td>서울특별시 강남구 논현로85길 5-10</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오징어청춘" target="_blank">오징어청춘</a></td>
+    <td>서울특별시 강남구 선릉로86길 44</td>
+    <td>횟집</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/명동피자" target="_blank">명동피자</a></td>
+    <td>서울특별시 강남구 역삼로63길 6</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/그우동집" target="_blank">그우동집</a></td>
+    <td>서울특별시 강남구 언주로 311</td>
+    <td>일식 면 요리</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/위드맘" target="_blank">위드맘</a></td>
+    <td>서울특별시 강남구 선릉로89길 9</td>
+    <td>김밥/만두/분식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/에글렌느퀴진" target="_blank">에글렌느퀴진</a></td>
+    <td>서울특별시 강남구 언주로89길 23</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/하이들" target="_blank">하이들</a></td>
+    <td>서울특별시 강남구 역삼로34길 7</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/깐부치킨" target="_blank">깐부치킨</a></td>
+    <td>서울특별시 강남구 언주로85길 7</td>
+    <td>치킨</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/비어락" target="_blank">비어락</a></td>
+    <td>서울특별시 강남구 선릉로62길 19</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아리스타" target="_blank">아리스타</a></td>
+    <td>서울특별시 강남구 테헤란로70길 13</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/황태사랑" target="_blank">황태사랑</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/두레국수" target="_blank">두레국수</a></td>
+    <td>서울특별시 강남구 언주로98길 14</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/티씨엔컴퍼니" target="_blank">티씨엔컴퍼니</a></td>
+    <td>서울특별시 강남구 선릉로86길 16</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/에슬로우상록점" target="_blank">에슬로우상록점</a></td>
+    <td>서울특별시 강남구 언주로98길 21</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/매머드익스프레스역삼신일유토빌점" target="_blank">매머드익스프레스역삼신일유토빌점</a></td>
+    <td>서울특별시 강남구 논현로87길 41</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/수림복" target="_blank">수림복</a></td>
+    <td>서울특별시 강남구 테헤란로77길 6</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/블루샥" target="_blank">블루샥</a></td>
+    <td>서울특별시 강남구 테헤란로33길 5</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제이알푸드" target="_blank">제이알푸드</a></td>
+    <td>서울특별시 강남구 논현로85길 52</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/신의주순대와쭈꾸미" target="_blank">신의주순대와쭈꾸미</a></td>
+    <td>서울특별시 강남구 언주로85길 7</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/겐비" target="_blank">겐비</a></td>
+    <td>서울특별시 강남구 테헤란로64길 25</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/정대감" target="_blank">정대감</a></td>
+    <td>서울특별시 강남구 논현로85길 47</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이디야" target="_blank">이디야</a></td>
+    <td>서울특별시 강남구 언주로81길 8</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/노오랑김밥분식" target="_blank">노오랑김밥분식</a></td>
+    <td>서울특별시 강남구 테헤란로64길 13</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/만족" target="_blank">만족</a></td>
+    <td>서울특별시 강남구 테헤란로 313</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/포레스트" target="_blank">포레스트</a></td>
+    <td>서울특별시 강남구 테헤란로33길 15</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/최대패" target="_blank">최대패</a></td>
+    <td>서울특별시 강남구 테헤란로55길 25</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/교동짬뽕명가점" target="_blank">교동짬뽕명가점</a></td>
+    <td>서울특별시 강남구 테헤란로 151</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/정성이가득찬집밥" target="_blank">정성이가득찬집밥</a></td>
+    <td>서울특별시 강남구 테헤란로52길 21</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카츠노즈믹" target="_blank">카츠노즈믹</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/슬로우앤로" target="_blank">슬로우앤로</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/신림백순대전주집" target="_blank">신림백순대전주집</a></td>
+    <td>서울특별시 강남구 언주로 408</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/믿음직화먼슬리키친" target="_blank">믿음직화먼슬리키친</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/홍콩반점0410" target="_blank">홍콩반점0410</a></td>
+    <td>서울특별시 강남구 선릉로76길 22</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/둥둥카롱" target="_blank">둥둥카롱</a></td>
+    <td>서울특별시 강남구 선릉로72길 20</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/정성이가득찬집밥강남" target="_blank">정성이가득찬집밥강남</a></td>
+    <td>서울특별시 강남구 테헤란로52길 21</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대작" target="_blank">대작</a></td>
+    <td>서울특별시 강남구 언주로98길 8-2</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우리집젤라또" target="_blank">우리집젤라또</a></td>
+    <td>서울특별시 강남구 선릉로68길 7</td>
+    <td>아이스크림/빙수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/구영회참치&초밥" target="_blank">구영회참치&초밥</a></td>
+    <td>서울특별시 강남구 테헤란로39길 37</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오로라F&B" target="_blank">오로라F&B</a></td>
+    <td>서울특별시 강남구 언주로 420</td>
+    <td>베트남식 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/토종시골집" target="_blank">토종시골집</a></td>
+    <td>서울특별시 강남구 테헤란로 328</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/해변의쭈꾸미" target="_blank">해변의쭈꾸미</a></td>
+    <td>서울특별시 강남구 언주로86길 11</td>
+    <td>해산물 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/홍가네" target="_blank">홍가네</a></td>
+    <td>서울특별시 강남구 논현로85길 5-3</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/컴포즈커피" target="_blank">컴포즈커피</a></td>
+    <td>서울특별시 강남구 선릉로90길 56</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이백" target="_blank">이백</a></td>
+    <td>서울특별시 강남구 언주로85길 14</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/뽕족" target="_blank">뽕족</a></td>
+    <td>서울특별시 강남구 역삼로65길 31</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/푸에르코역삼" target="_blank">푸에르코역삼</a></td>
+    <td>서울특별시 강남구 테헤란로 146</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/얌샘김밥" target="_blank">얌샘김밥</a></td>
+    <td>서울특별시 강남구 선릉로72길 20</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/리빈에프엔비" target="_blank">리빈에프엔비</a></td>
+    <td>서울특별시 강남구 언주로90길 8</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/판동면옥" target="_blank">판동면옥</a></td>
+    <td>서울특별시 강남구 역삼로77길 5</td>
+    <td>냉면/밀면</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/해머스미스커피선릉세웅타워소망점" target="_blank">해머스미스커피선릉세웅타워소망점</a></td>
+    <td>서울특별시 강남구 선릉로94길 12</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/드리체커피" target="_blank">드리체커피</a></td>
+    <td>서울특별시 강남구 선릉로90길 68</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/룸서비스파이브스타" target="_blank">룸서비스파이브스타</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/범표원두" target="_blank">범표원두</a></td>
+    <td>서울특별시 강남구 테헤란로37길 42</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/유쾌한미식가국기원" target="_blank">유쾌한미식가국기원</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/연리지" target="_blank">연리지</a></td>
+    <td>서울특별시 강남구 언주로 408</td>
+    <td>일식 회/초밥</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/김밥" target="_blank">김밥</a></td>
+    <td>서울특별시 강남구 언주로 420</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/홍대쌀국수" target="_blank">홍대쌀국수</a></td>
+    <td>서울특별시 강남구 언주로 420</td>
+    <td>베트남식 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마카몽" target="_blank">마카몽</a></td>
+    <td>서울특별시 강남구 선릉로76길 9</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/에프원" target="_blank">에프원</a></td>
+    <td>서울특별시 강남구 테헤란로47길 8</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페앳코너" target="_blank">카페앳코너</a></td>
+    <td>서울특별시 강남구 역삼로63길 20</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/용용선생" target="_blank">용용선생</a></td>
+    <td>서울특별시 강남구 선릉로86길 44</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더뭉티기" target="_blank">더뭉티기</a></td>
+    <td>서울특별시 강남구 언주로 311</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대독장" target="_blank">대독장</a></td>
+    <td>서울특별시 강남구 논현로85길 59</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/홍경" target="_blank">홍경</a></td>
+    <td>서울특별시 강남구 언주로98길 39</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/비칠공오" target="_blank">비칠공오</a></td>
+    <td>서울특별시 강남구 테헤란로51길 10</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페리" target="_blank">카페리[利]</a></td>
+    <td>서울특별시 강남구 논현로86길 33</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/피렌체" target="_blank">피렌체</a></td>
+    <td>서울특별시 강남구 언주로 548</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/호샤퀴테리에" target="_blank">호샤퀴테리에</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>경양식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/토마토김밥" target="_blank">토마토김밥</a></td>
+    <td>서울특별시 강남구 선릉로64길 5</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/터치카페" target="_blank">터치카페</a></td>
+    <td>서울특별시 강남구 역삼로63길 5</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/샐러디선릉" target="_blank">샐러디선릉</a></td>
+    <td>서울특별시 강남구 선릉로86길 18</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/초가집삼계탕" target="_blank">초가집삼계탕</a></td>
+    <td>서울특별시 강남구 테헤란로55길 15</td>
+    <td>닭/오리고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이승재참치" target="_blank">이승재참치</a></td>
+    <td>서울특별시 강남구 역삼로63길 22</td>
+    <td>일식 회/초밥</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/알라보" target="_blank">알라보</a></td>
+    <td>서울특별시 강남구 언주로71길 31</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제스트원역삼지점" target="_blank">제스트원역삼지점</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대향연" target="_blank">대향연</a></td>
+    <td>서울특별시 강남구 언주로 305</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/해미정" target="_blank">해미정</a></td>
+    <td>서울특별시 강남구 테헤란로33길 13</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/신야텐야역삼르네상스점" target="_blank">신야텐야역삼르네상스점</a></td>
+    <td>서울특별시 강남구 언주로93길 20</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/비에이치씨역삼" target="_blank">비에이치씨역삼</a></td>
+    <td>서울특별시 강남구 언주로99길 9</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/촌구석" target="_blank">촌구석</a></td>
+    <td>서울특별시 강남구 역삼로37길 9</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/벨라" target="_blank">벨라</a></td>
+    <td>서울특별시 강남구 테헤란로33길 23</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/기로" target="_blank">기로</a></td>
+    <td>서울특별시 강남구 선릉로69길 7</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/미로정" target="_blank">미로정</a></td>
+    <td>서울특별시 강남구 테헤란로33길 19</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/딩동댕" target="_blank">딩동댕</a></td>
+    <td>서울특별시 강남구 테헤란로 340</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대왕곱창&찹쌀꿔바로우" target="_blank">대왕곱창&찹쌀꿔바로우</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/난만" target="_blank">난만</a></td>
+    <td>서울특별시 강남구 테헤란로39길 50</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/직화한상" target="_blank">직화한상</a></td>
+    <td>서울특별시 강남구 테헤란로 440</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/네모오징어포스코" target="_blank">네모오징어포스코</a></td>
+    <td>서울특별시 강남구 테헤란로77길 17</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/세드라" target="_blank">세드라</a></td>
+    <td>서울특별시 강남구 역삼로67길 15</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아방가르드아방베이커리센터필드점" target="_blank">아방가르드아방베이커리센터필드점</a></td>
+    <td>서울특별시 강남구 테헤란로 231</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/푸드트리오" target="_blank">푸드트리오</a></td>
+    <td>서울특별시 강남구 테헤란로43길 29</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페봄" target="_blank">카페봄</a></td>
+    <td>서울특별시 강남구 테헤란로43길 19</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/중화주가명정루" target="_blank">중화주가명정루</a></td>
+    <td>서울특별시 강남구 테헤란로70길 12</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/백억하누" target="_blank">백억하누</a></td>
+    <td>서울특별시 강남구 언주로 508</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/닥터다이어리" target="_blank">닥터다이어리</a></td>
+    <td>서울특별시 강남구 테헤란로 416</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/달빛칸타타" target="_blank">달빛칸타타</a></td>
+    <td>서울특별시 강남구 논현로85길 5-3</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/만상계" target="_blank">만상계</a></td>
+    <td>서울특별시 강남구 선릉로93길 11</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/여왕의브런치" target="_blank">여왕의브런치</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/푸드위즈" target="_blank">푸드위즈</a></td>
+    <td>서울특별시 강남구 언주로93길 21</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/훌랄라치킨" target="_blank">훌랄라치킨</a></td>
+    <td>서울특별시 강남구 테헤란로34길 17</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/김가네" target="_blank">김가네</a></td>
+    <td>서울특별시 강남구 역삼로64길 26</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/여로집" target="_blank">여로집</a></td>
+    <td>서울특별시 강남구 논현로85길 5-13</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/동막골1998" target="_blank">동막골1998</a></td>
+    <td>서울특별시 강남구 선릉로64길 15-3</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/필본" target="_blank">필본</a></td>
+    <td>서울특별시 강남구 언주로71길 11</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/포메인" target="_blank">포메인</a></td>
+    <td>서울특별시 강남구 선릉로93길 8</td>
+    <td>베트남식 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/을밀대컵" target="_blank">을밀대컵</a></td>
+    <td>서울특별시 강남구 논현로85길 52</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/커피데스크" target="_blank">커피데스크</a></td>
+    <td>서울특별시 강남구 언주로 514</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/명불허전원조골뱅이 선릉점" target="_blank">명불허전원조골뱅이 선릉점</a></td>
+    <td>서울특별시 강남구 역삼로63길 14</td>
+    <td>해산물 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/30년불멸의닭발" target="_blank">30년불멸의닭발</a></td>
+    <td>서울특별시 강남구 테헤란로 124</td>
+    <td>닭/오리고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더순탄" target="_blank">더순탄</a></td>
+    <td>서울특별시 강남구 테헤란로38길 29</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/꿀꼬꼬" target="_blank">꿀꼬꼬</a></td>
+    <td>서울특별시 강남구 언주로93길 28-7</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/델리커리삼성" target="_blank">델리커리삼성</a></td>
+    <td>서울특별시 강남구 테헤란로 440</td>
+    <td>경양식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/순남시래기" target="_blank">순남시래기</a></td>
+    <td>서울특별시 강남구 테헤란로34길 5</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/준" target="_blank">준</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/어그리" target="_blank">어그리</a></td>
+    <td>서울특별시 강남구 선릉로64길 11-10</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/샐러디" target="_blank">샐러디</a></td>
+    <td>서울특별시 강남구 선릉로93길 26</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/엘리야라이브" target="_blank">엘리야라이브</a></td>
+    <td>서울특별시 강남구 언주로98길 8-2</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/서울식당" target="_blank">서울식당</a></td>
+    <td>서울특별시 강남구 역삼로37길 14</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더푸드랩에프엔비" target="_blank">더푸드랩에프엔비</a></td>
+    <td>서울특별시 강남구 테헤란로 231</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/토주집" target="_blank">토주집</a></td>
+    <td>서울특별시 강남구 논현로85길 52</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/한가람" target="_blank">한가람</a></td>
+    <td>서울특별시 강남구 선릉로90길 62</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더메리어" target="_blank">더메리어</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아수라발발타" target="_blank">아수라발발타</a></td>
+    <td>서울특별시 강남구 테헤란로33길 13</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페더아르떼코인" target="_blank">카페더아르떼코인</a></td>
+    <td>서울특별시 강남구 선릉로86길 31</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/스노우폭스역삼" target="_blank">스노우폭스역삼</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/쿠사파스타" target="_blank">쿠사파스타</a></td>
+    <td>서울특별시 강남구 역삼로78길 15</td>
+    <td>파스타/스테이크</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/파란만잔" target="_blank">파란만잔</a></td>
+    <td>서울특별시 강남구 선릉로86길 15</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/농민백암" target="_blank">농민백암</a></td>
+    <td>서울특별시 강남구 선릉로86길 40-3</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카라" target="_blank">카라</a></td>
+    <td>서울특별시 강남구 언주로98길 18</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/일산칼국수" target="_blank">일산칼국수</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/연수커피" target="_blank">연수커피</a></td>
+    <td>서울특별시 강남구 선릉로82길 40</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/에스지푸드선릉블레스트플라워" target="_blank">에스지푸드선릉블레스트플라워</a></td>
+    <td>서울특별시 강남구 테헤란로 340</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마롱" target="_blank">마롱</a></td>
+    <td>서울특별시 강남구 테헤란로33길 6-5</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아임일리터역삼아이디점" target="_blank">아임일리터역삼아이디점</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/냉면&덮밥도배달돼지" target="_blank">냉면&덮밥도배달돼지</a></td>
+    <td>서울특별시 강남구 테헤란로39길 55</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오늘의식사작은식당" target="_blank">오늘의식사작은식당</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/일커피" target="_blank">일커피</a></td>
+    <td>서울특별시 강남구 선릉로92길 28</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/가츠몽" target="_blank">가츠몽</a></td>
+    <td>서울특별시 강남구 언주로 314</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마초야" target="_blank">마초야</a></td>
+    <td>서울특별시 강남구 역삼로64길 18</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/참치여행" target="_blank">참치여행</a></td>
+    <td>서울특별시 강남구 테헤란로53길 22</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/동래정선릉" target="_blank">동래정선릉</a></td>
+    <td>서울특별시 강남구 언주로98길 20</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페베네" target="_blank">카페베네</a></td>
+    <td>서울특별시 강남구 테헤란로 411</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/코코엔터테인먼트" target="_blank">코코엔터테인먼트</a></td>
+    <td>서울특별시 강남구 언주로 528</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/신스패밀리" target="_blank">신스패밀리</a></td>
+    <td>서울특별시 강남구 언주로103길 35</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/삼탱이시래기밥" target="_blank">삼탱이시래기밥</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/로스트엔트리" target="_blank">로스트엔트리</a></td>
+    <td>서울특별시 강남구 테헤란로38길 10</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/백두화덕족발" target="_blank">백두화덕족발</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>족발/보쌈</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/모두의죽" target="_blank">모두의죽</a></td>
+    <td>서울특별시 강남구 테헤란로38길 29</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/파스타고" target="_blank">파스타고</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>파스타/스테이크</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/도쿄등심선릉" target="_blank">도쿄등심선릉</a></td>
+    <td>서울특별시 강남구 테헤란로78길 16</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/큰입아구찜" target="_blank">큰입아구찜</a></td>
+    <td>서울특별시 강남구 테헤란로57길 17</td>
+    <td>해산물 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/미라클푸드" target="_blank">미라클푸드</a></td>
+    <td>서울특별시 강남구 테헤란로 124</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/진해" target="_blank">진해</a></td>
+    <td>서울특별시 강남구 언주로81길 8</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/강남푸드코트갈비탕&해장국" target="_blank">강남푸드코트갈비탕&해장국</a></td>
+    <td>서울특별시 강남구 선릉로63길 13</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/토지소곱창강남" target="_blank">토지소곱창강남</a></td>
+    <td>서울특별시 강남구 선릉로72길 34</td>
+    <td>곱창 전골/구이</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/강남푸드코트까시발라생선구이" target="_blank">강남푸드코트까시발라생선구이</a></td>
+    <td>서울특별시 강남구 선릉로63길 13</td>
+    <td>해산물 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마라와라" target="_blank">마라와라</a></td>
+    <td>서울특별시 강남구 언주로93길 28-4</td>
+    <td>마라탕/훠궈</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/석사다점" target="_blank">석사다점</a></td>
+    <td>서울특별시 강남구 역삼로65길 20</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/선릉불고기" target="_blank">선릉불고기</a></td>
+    <td>서울특별시 강남구 선릉로82길 43</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/황금식당" target="_blank">황금식당</a></td>
+    <td>서울특별시 강남구 테헤란로 311</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/냉면고집" target="_blank">냉면고집</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>냉면/밀면</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/정통마라탕마포마라회관" target="_blank">정통마라탕마포마라회관</a></td>
+    <td>서울특별시 강남구 선릉로86길 30</td>
+    <td>마라탕/훠궈</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/바른커피" target="_blank">바른커피</a></td>
+    <td>서울특별시 강남구 테헤란로33길 7</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/슈퍼유" target="_blank">슈퍼유</a></td>
+    <td>서울특별시 강남구 역삼로78길 8</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/신家네김밥" target="_blank">신家네김밥</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/풍천숯불명품웅장어" target="_blank">풍천숯불명품웅장어</a></td>
+    <td>서울특별시 강남구 선릉로93길 8</td>
+    <td>해산물 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/파리크라상리나스선릉" target="_blank">파리크라상리나스선릉</a></td>
+    <td>서울특별시 강남구 테헤란로 419</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/생활맥주역삼" target="_blank">생활맥주역삼</a></td>
+    <td>서울특별시 강남구 선릉로93길 27</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/큰맘할매순대국" target="_blank">큰맘할매순대국</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/킷사텐" target="_blank">킷사텐</a></td>
+    <td>서울특별시 강남구 언주로85길 23-10</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/기점마라탕" target="_blank">기점마라탕</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>마라탕/훠궈</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/깐부치킨" target="_blank">깐부치킨</a></td>
+    <td>서울특별시 강남구 논현로85길 37</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/테이스티나인" target="_blank">테이스티나인</a></td>
+    <td>서울특별시 강남구 테헤란로 424</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/위스키레이블" target="_blank">위스키레이블</a></td>
+    <td>서울특별시 강남구 선릉로86길 40</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/왕십리충무김밥" target="_blank">왕십리충무김밥</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/도담치킨" target="_blank">도담치킨</a></td>
+    <td>서울특별시 강남구 테헤란로52길 16</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/빽다방선릉" target="_blank">빽다방선릉</a></td>
+    <td>서울특별시 강남구 선릉로86길 8</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/문리버" target="_blank">문리버</a></td>
+    <td>서울특별시 강남구 선릉로90길 56</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/육미쪽갈비" target="_blank">육미쪽갈비</a></td>
+    <td>서울특별시 강남구 역삼로63길 22</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/웨인스베이글스센터필드점" target="_blank">웨인스베이글스센터필드점</a></td>
+    <td>서울특별시 강남구 테헤란로 231</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/담다" target="_blank">담다</a></td>
+    <td>서울특별시 강남구 선릉로100길 24</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/서초동연가" target="_blank">서초동연가</a></td>
+    <td>서울특별시 강남구 테헤란로33길 24</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/별나라콩다방" target="_blank">별나라콩다방</a></td>
+    <td>서울특별시 강남구 역삼로77길 7</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/자미당" target="_blank">자미당</a></td>
+    <td>서울특별시 강남구 선릉로68길 11</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/수현복집" target="_blank">수현복집</a></td>
+    <td>서울특별시 강남구 테헤란로39길 38</td>
+    <td>복 요리 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이화수전통육개장" target="_blank">이화수전통육개장</a></td>
+    <td>서울특별시 강남구 언주로93길 21</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/에머이" target="_blank">에머이</a></td>
+    <td>서울특별시 강남구 선릉로64길 14</td>
+    <td>베트남식 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/미담숯불바베큐" target="_blank">미담숯불바베큐</a></td>
+    <td>서울특별시 강남구 언주로 323</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/뽕나무쟁이선릉" target="_blank">뽕나무쟁이선릉</a></td>
+    <td>서울특별시 강남구 역삼로65길 31</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/맵당" target="_blank">맵당</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/호돌이반점" target="_blank">호돌이반점</a></td>
+    <td>서울특별시 강남구 테헤란로 147</td>
+    <td>중국집</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/부거부거" target="_blank">부거부거</a></td>
+    <td>서울특별시 강남구 테헤란로 147</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/클로리스" target="_blank">클로리스</a></td>
+    <td>서울특별시 강남구 테헤란로 146</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/팟스테이크" target="_blank">팟스테이크</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>파스타/스테이크</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마포만두선릉" target="_blank">마포만두선릉</a></td>
+    <td>서울특별시 강남구 선릉로86길 8</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/히라이" target="_blank">히라이</a></td>
+    <td>서울특별시 강남구 역삼로63길 24</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/에이치디유통" target="_blank">에이치디유통</a></td>
+    <td>서울특별시 강남구 선릉로86길 38</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/선릉FOOD" target="_blank">선릉FOOD</a></td>
+    <td>서울특별시 강남구 선릉로93길 32</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오늘도빙수" target="_blank">오늘도빙수</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/핵밥" target="_blank">핵밥</a></td>
+    <td>서울특별시 강남구 테헤란로 309</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/커피코트선릉한신인터밸리점" target="_blank">커피코트선릉한신인터밸리점</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/지구당" target="_blank">지구당</a></td>
+    <td>서울특별시 강남구 테헤란로 409</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/탕화쿵푸마라탕" target="_blank">탕화쿵푸마라탕</a></td>
+    <td>서울특별시 강남구 선릉로64길 15-14</td>
+    <td>마라탕/훠궈</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/원할머니보쌈족발대치" target="_blank">원할머니보쌈족발대치</a></td>
+    <td>서울특별시 강남구 언주로69길 7</td>
+    <td>족발/보쌈</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/소노야" target="_blank">소노야</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/팔라쪼디비노인터내셔널" target="_blank">팔라쪼디비노인터내셔널</a></td>
+    <td>서울특별시 강남구 언주로 517</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우마쿠라" target="_blank">우마쿠라</a></td>
+    <td>서울특별시 강남구 선릉로100길 54</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/디씨티네트웍스" target="_blank">디씨티네트웍스</a></td>
+    <td>서울특별시 강남구 선릉로96길 5-16</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/식고미" target="_blank">식고미</a></td>
+    <td>서울특별시 강남구 언주로71길 5-12</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/윤가양꼬치" target="_blank">윤가양꼬치</a></td>
+    <td>서울특별시 강남구 언주로94길 9-4</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/샹베리" target="_blank">샹베리</a></td>
+    <td>서울특별시 강남구 선릉로103길 5</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/옛날그맛명동칼국수" target="_blank">옛날그맛명동칼국수</a></td>
+    <td>서울특별시 강남구 언주로87길 49</td>
+    <td>국수/칼국수</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/스넛티" target="_blank">스넛티</a></td>
+    <td>서울특별시 강남구 언주로 407</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/배럭" target="_blank">배럭</a></td>
+    <td>서울특별시 강남구 논현로85길 52</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/정가식당" target="_blank">정가식당</a></td>
+    <td>서울특별시 강남구 테헤란로55길 17</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/자유로운식탁" target="_blank">자유로운식탁</a></td>
+    <td>서울특별시 강남구 테헤란로38길 39</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/쥬씨역삼상록회관점" target="_blank">쥬씨역삼상록회관점</a></td>
+    <td>서울특별시 강남구 언주로98길 17</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/전주한정식" target="_blank">전주한정식</a></td>
+    <td>서울특별시 강남구 선릉로82길 25</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/쭈꾸미앤낙지" target="_blank">쭈꾸미앤낙지</a></td>
+    <td>서울특별시 강남구 논현로87길 41</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/사천옥" target="_blank">사천옥</a></td>
+    <td>서울특별시 강남구 선릉로86길 16</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/꽃보다등심" target="_blank">꽃보다등심</a></td>
+    <td>서울특별시 강남구 테헤란로77길 23</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/양가식당" target="_blank">양가식당</a></td>
+    <td>서울특별시 강남구 역삼로65길 33</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/지코바대치" target="_blank">지코바대치</a></td>
+    <td>서울특별시 강남구 선릉로66길 6</td>
+    <td>치킨</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/스노우폭스" target="_blank">스노우폭스</a></td>
+    <td>서울특별시 강남구 테헤란로 415</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/교대이층집" target="_blank">교대이층집</a></td>
+    <td>서울특별시 강남구 테헤란로70길 14-12</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대치동숯불갈비" target="_blank">대치동숯불갈비</a></td>
+    <td>서울특별시 강남구 선릉로64길 15-6</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/스마트보드카페" target="_blank">스마트보드카페</a></td>
+    <td>서울특별시 강남구 테헤란로53길 14</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/얌샘김밥" target="_blank">얌샘김밥</a></td>
+    <td>서울특별시 강남구 테헤란로63길 9</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더차이나" target="_blank">더차이나</a></td>
+    <td>서울특별시 강남구 선릉로90길 42</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/선유도" target="_blank">선유도</a></td>
+    <td>서울특별시 강남구 선릉로86길 28</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대봉김밥" target="_blank">대봉김밥</a></td>
+    <td>서울특별시 강남구 언주로86길 11</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/피그커피" target="_blank">피그커피</a></td>
+    <td>서울특별시 강남구 언주로97길 15</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/멜팅쿠키하우스" target="_blank">멜팅쿠키하우스</a></td>
+    <td>서울특별시 강남구 선릉로68길 25</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/장독대김치찌개" target="_blank">장독대김치찌개</a></td>
+    <td>서울특별시 강남구 테헤란로64길 24</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/육미식탁" target="_blank">육미식탁</a></td>
+    <td>서울특별시 강남구 선릉로76길 22</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우가네" target="_blank">우가네</a></td>
+    <td>서울특별시 강남구 선릉로96길 7</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/미스터투고커피앤디저트" target="_blank">미스터투고커피앤디저트</a></td>
+    <td>서울특별시 강남구 선릉로82길 43</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/상화컴퍼니" target="_blank">상화컴퍼니</a></td>
+    <td>서울특별시 강남구 역삼로65길 33</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/동보성" target="_blank">동보성</a></td>
+    <td>서울특별시 강남구 테헤란로 406</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/정읍그맛" target="_blank">정읍그맛</a></td>
+    <td>서울특별시 강남구 테헤란로64길 27</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/죠스떡볶이" target="_blank">죠스떡볶이</a></td>
+    <td>서울특별시 강남구 선릉로64길 5</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/스파게티스토리" target="_blank">스파게티스토리</a></td>
+    <td>서울특별시 강남구 역삼로64길 26</td>
+    <td>파스타/스테이크</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/커피볶는곰" target="_blank">커피볶는곰</a></td>
+    <td>서울특별시 강남구 선릉로68길 12</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대치골한우곱창" target="_blank">대치골한우곱창</a></td>
+    <td>서울특별시 강남구 선릉로64길 11-5</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/청자골" target="_blank">청자골</a></td>
+    <td>서울특별시 강남구 역삼로77길 17</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/예향" target="_blank">예향</a></td>
+    <td>서울특별시 강남구 테헤란로63길 20</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/브루웍스" target="_blank">브루웍스</a></td>
+    <td>서울특별시 강남구 선릉로86길 15</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대왕부대찌개" target="_blank">대왕부대찌개</a></td>
+    <td>서울특별시 강남구 선릉로64길 15</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/한성양꼬치" target="_blank">한성양꼬치</a></td>
+    <td>서울특별시 강남구 테헤란로70길 26</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/티엔티엔티엔" target="_blank">티엔티엔티엔</a></td>
+    <td>서울특별시 강남구 테헤란로77길 22</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/명동칼국수" target="_blank">명동칼국수</a></td>
+    <td>서울특별시 강남구 선릉로94길 9</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/창바리한상" target="_blank">창바리한상</a></td>
+    <td>서울특별시 강남구 테헤란로37길 23</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/수림복국" target="_blank">수림복국</a></td>
+    <td>서울특별시 강남구 테헤란로77길 11-13</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/둘둘치킨" target="_blank">둘둘치킨</a></td>
+    <td>서울특별시 강남구 테헤란로69길 9</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/바른치킨" target="_blank">바른치킨</a></td>
+    <td>서울특별시 강남구 선릉로86길 17</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/청춘닭볶이" target="_blank">청춘닭볶이</a></td>
+    <td>서울특별시 강남구 선릉로76길 23</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/듬북담북" target="_blank">듬북담북</a></td>
+    <td>서울특별시 강남구 테헤란로69길 9</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/소운빙" target="_blank">소운빙</a></td>
+    <td>서울특별시 강남구 선릉로68길 9</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/써니쿡" target="_blank">써니쿡</a></td>
+    <td>서울특별시 강남구 역삼로78길 15</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/전주순대" target="_blank">전주순대</a></td>
+    <td>서울특별시 강남구 테헤란로69길 10</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아오끼" target="_blank">아오끼</a></td>
+    <td>서울특별시 강남구 선릉로100길 30</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/부대찌개'연'" target="_blank">부대찌개'연'</a></td>
+    <td>서울특별시 강남구 선릉로86길 34</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/맛바라기" target="_blank">맛바라기</a></td>
+    <td>서울특별시 강남구 테헤란로 504</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/나주육곱식당,커피플리즈" target="_blank">나주육곱식당,커피플리즈</a></td>
+    <td>서울특별시 강남구 선릉로92길 11</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마담가토" target="_blank">마담가토</a></td>
+    <td>서울특별시 강남구 선릉로86길 28</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/북촌손만두" target="_blank">북촌손만두</a></td>
+    <td>서울특별시 강남구 선릉로86길 42</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/향호면옥" target="_blank">향호면옥</a></td>
+    <td>서울특별시 강남구 선릉로64길 15-10</td>
+    <td>냉면/밀면</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/본카페" target="_blank">본카페</a></td>
+    <td>서울특별시 강남구 선릉로62길 27-3</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페디저트" target="_blank">카페디저트</a></td>
+    <td>서울특별시 강남구 선릉로76길 28</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/파이하우스" target="_blank">파이하우스</a></td>
+    <td>서울특별시 강남구 선릉로62길 29</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/새마을식당" target="_blank">새마을식당</a></td>
+    <td>서울특별시 강남구 선릉로64길 20</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/최가네버섯매운탕칼국수" target="_blank">최가네버섯매운탕칼국수</a></td>
+    <td>서울특별시 강남구 선릉로64길 20</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/김셰프의도시어부" target="_blank">김셰프의도시어부</a></td>
+    <td>서울특별시 강남구 테헤란로 614</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더트리니티위드미" target="_blank">더트리니티위드미</a></td>
+    <td>서울특별시 강남구 테헤란로 421</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/돈까츠제이에스테이블" target="_blank">돈까츠제이에스테이블</a></td>
+    <td>서울특별시 강남구 선릉로82길 5</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/노리" target="_blank">노리</a></td>
+    <td>서울특별시 강남구 선릉로64길 10-1</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/감탄회관" target="_blank">감탄회관</a></td>
+    <td>서울특별시 강남구 테헤란로64길 24</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/친친" target="_blank">친친</a></td>
+    <td>서울특별시 강남구 테헤란로63길 12</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/글라스커피" target="_blank">글라스커피</a></td>
+    <td>서울특별시 강남구 테헤란로 534</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/선릉가든" target="_blank">선릉가든</a></td>
+    <td>서울특별시 강남구 선릉로100길 34</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/항방양꼬치" target="_blank">항방양꼬치</a></td>
+    <td>서울특별시 강남구 선릉로64길 15-7</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/하남장돼지" target="_blank">하남장돼지</a></td>
+    <td>서울특별시 강남구 선릉로86길 10</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/전주집" target="_blank">전주집</a></td>
+    <td>서울특별시 강남구 테헤란로77길 11-9</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/한방정통삼계탕" target="_blank">한방정통삼계탕</a></td>
+    <td>서울특별시 강남구 테헤란로68길 25</td>
+    <td>닭/오리고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/신동궁감자탕뼈숯불구이" target="_blank">신동궁감자탕뼈숯불구이</a></td>
+    <td>서울특별시 강남구 선릉로86길 39</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/진고래" target="_blank">진고래</a></td>
+    <td>서울특별시 강남구 선릉로86길 18</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/전주콩나물국밥" target="_blank">전주콩나물국밥</a></td>
+    <td>서울특별시 강남구 선릉로86길 40-3</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/신세계푸드보노보노" target="_blank">신세계푸드보노보노</a></td>
+    <td>서울특별시 강남구 테헤란로 508</td>
+    <td>해산물 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/비알던킨도너츠선릉역" target="_blank">비알던킨도너츠선릉역</a></td>
+    <td>서울특별시 강남구 테헤란로 422</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/뽕나무쟁이" target="_blank">뽕나무쟁이</a></td>
+    <td>서울특별시 강남구 역삼로65길 33</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/에스앤비네트웍스" target="_blank">에스앤비네트웍스</a></td>
+    <td>서울특별시 강남구 언주로 432</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제이엔제이다이닝스시산원" target="_blank">제이엔제이다이닝스시산원</a></td>
+    <td>서울특별시 강남구 선릉로100길 42</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/김돈이" target="_blank">김돈이</a></td>
+    <td>서울특별시 강남구 선릉로94길 9</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/케이앤피구르메시스템" target="_blank">케이앤피구르메시스템</a></td>
+    <td>서울특별시 강남구 테헤란로78길 14-9</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/광양불고기본가" target="_blank">광양불고기본가</a></td>
+    <td>서울특별시 강남구 테헤란로 124</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/다연외식" target="_blank">다연외식</a></td>
+    <td>서울특별시 강남구 테헤란로70길 28</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더휴컨벤션" target="_blank">더휴컨벤션</a></td>
+    <td>서울특별시 강남구 테헤란로 407</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/커피디지" target="_blank">커피디지</a></td>
+    <td>서울특별시 강남구 테헤란로 201</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더트리니티앤어스" target="_blank">더트리니티앤어스</a></td>
+    <td>서울특별시 강남구 테헤란로 421</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우노" target="_blank">우노</a></td>
+    <td>서울특별시 강남구 테헤란로70길 10</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/고향집" target="_blank">고향집</a></td>
+    <td>서울특별시 강남구 선릉로96길 2</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/화부돈" target="_blank">화부돈</a></td>
+    <td>서울특별시 강남구 선릉로64길 17</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/베스트" target="_blank">베스트</a></td>
+    <td>서울특별시 강남구 언주로69길 8</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/날마다막창" target="_blank">날마다막창</a></td>
+    <td>서울특별시 강남구 역삼로63길 17</td>
+    <td>곱창 전골/구이</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/호남식당" target="_blank">호남식당</a></td>
+    <td>서울특별시 강남구 선릉로68길 12</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/창포" target="_blank">창포</a></td>
+    <td>서울특별시 강남구 선릉로62길 19</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이디야" target="_blank">이디야</a></td>
+    <td>서울특별시 강남구 역삼로52길 14</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/멍텅구리" target="_blank">멍텅구리</a></td>
+    <td>서울특별시 강남구 논현로85길 47</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/원방스넥" target="_blank">원방스넥</a></td>
+    <td>서울특별시 강남구 테헤란로 429</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/롯데스넥바" target="_blank">롯데스넥바</a></td>
+    <td>서울특별시 강남구 선릉로86길 31</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/베스킨라빈스대치" target="_blank">베스킨라빈스대치</a></td>
+    <td>서울특별시 강남구 선릉로64길 5</td>
+    <td>아이스크림/빙수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/홍미닭발" target="_blank">홍미닭발</a></td>
+    <td>서울특별시 강남구 선릉로72길 12</td>
+    <td>닭/오리고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/파리바게뜨한티역점" target="_blank">파리바게뜨한티역점</a></td>
+    <td>서울특별시 강남구 선릉로64길 19</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/미쓰양꼬치" target="_blank">미쓰양꼬치</a></td>
+    <td>서울특별시 강남구 테헤란로64길 26</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/엘에이북창동순두부" target="_blank">엘에이북창동순두부</a></td>
+    <td>서울특별시 강남구 선릉로82길 15</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/초장집" target="_blank">초장집</a></td>
+    <td>서울특별시 강남구 선릉로86길 38</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/병천순대" target="_blank">병천순대</a></td>
+    <td>서울특별시 강남구 선릉로90길 70</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/수하동" target="_blank">수하동</a></td>
+    <td>서울특별시 강남구 테헤란로78길 16</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/선릉신도세기역삼지점" target="_blank">선릉신도세기역삼지점</a></td>
+    <td>서울특별시 강남구 테헤란로52길 15</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/글램핑이천" target="_blank">글램핑이천</a></td>
+    <td>서울특별시 강남구 테헤란로39길 50</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/북촌해물" target="_blank">북촌해물</a></td>
+    <td>서울특별시 강남구 테헤란로64길 9</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제주돈프로" target="_blank">제주돈프로</a></td>
+    <td>서울특별시 강남구 언주로94길 15</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이피아이" target="_blank">이피아이</a></td>
+    <td>서울특별시 강남구 봉은사로50길 10</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/듬북담북" target="_blank">듬북담북</a></td>
+    <td>서울특별시 강남구 선릉로86길 26</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/크레이지후라이포스코" target="_blank">크레이지후라이포스코</a></td>
+    <td>서울특별시 강남구 테헤란로78길 16</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/놀부부대찌개역삼" target="_blank">놀부부대찌개역삼</a></td>
+    <td>서울특별시 강남구 역삼로33길 7</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페선릉" target="_blank">카페선릉</a></td>
+    <td>서울특별시 강남구 테헤란로64길 8</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/태평식당" target="_blank">태평식당</a></td>
+    <td>서울특별시 강남구 논현로87길 23</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이터너발효커피" target="_blank">이터너발효커피</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/맘스터치" target="_blank">맘스터치</a></td>
+    <td>서울특별시 강남구 선릉로93길 32</td>
+    <td>버거</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/삼미대포" target="_blank">삼미대포</a></td>
+    <td>서울특별시 강남구 선릉로93길 15</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/모토식당" target="_blank">모토식당</a></td>
+    <td>서울특별시 강남구 언주로98길 37</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/백운봉막국수" target="_blank">백운봉막국수</a></td>
+    <td>서울특별시 강남구 언주로93길 30</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더또순" target="_blank">더또순</a></td>
+    <td>서울특별시 강남구 테헤란로38길 29</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/강남어로장" target="_blank">강남어로장</a></td>
+    <td>서울특별시 강남구 테헤란로52길 15</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/모넬로트리오" target="_blank">모넬로트리오</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/88시장버거" target="_blank">88시장버거</a></td>
+    <td>서울특별시 강남구 테헤란로37길 29</td>
+    <td>버거</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/고기반햄반김치찌개&김치찜" target="_blank">고기반햄반김치찌개&김치찜</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/미스터코코" target="_blank">미스터코코</a></td>
+    <td>서울특별시 강남구 역삼로78길 14</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더달콤쿠키" target="_blank">더달콤쿠키</a></td>
+    <td>서울특별시 강남구 봉은사로44길 25</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/남촌탕반" target="_blank">남촌탕반</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/씨엘드파리" target="_blank">씨엘드파리</a></td>
+    <td>서울특별시 강남구 선릉로68길 7</td>
+    <td>빵/도넛</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아리산" target="_blank">아리산</a></td>
+    <td>서울특별시 강남구 언주로71길 11</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/갈비삼대" target="_blank">갈비삼대</a></td>
+    <td>서울특별시 강남구 언주로93길 32-6</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/코우" target="_blank">코우</a></td>
+    <td>서울특별시 강남구 언주로98길 23</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/명동칼국수" target="_blank">명동칼국수</a></td>
+    <td>서울특별시 강남구 테헤란로 440</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/바이나플라워카페" target="_blank">바이나플라워카페</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오사무식당" target="_blank">오사무식당</a></td>
+    <td>서울특별시 강남구 테헤란로 142</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/스시애" target="_blank">스시애</a></td>
+    <td>서울특별시 강남구 선릉로64길 7</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/쓰리팝피씨카페" target="_blank">쓰리팝피씨카페</a></td>
+    <td>서울특별시 강남구 테헤란로 107</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/24시중식당취빈" target="_blank">24시중식당취빈</a></td>
+    <td>서울특별시 강남구 언주로 323</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/써니사이드업강남" target="_blank">써니사이드업강남</a></td>
+    <td>서울특별시 강남구 테헤란로 142</td>
+    <td>경양식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/호보식당" target="_blank">호보식당</a></td>
+    <td>서울특별시 강남구 논현로85길 43</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/디어무드더모먼트" target="_blank">디어무드더모먼트</a></td>
+    <td>서울특별시 강남구 테헤란로55길 18</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/피제이푸드" target="_blank">피제이푸드</a></td>
+    <td>서울특별시 강남구 선릉로82길 28</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/열정에기름붓기강카페작업실" target="_blank">열정에기름붓기강카페작업실</a></td>
+    <td>서울특별시 강남구 테헤란로 126</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/북촌순두부보쌈" target="_blank">북촌순두부보쌈</a></td>
+    <td>서울특별시 강남구 언주로85길 7</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/뮬리" target="_blank">뮬리</a></td>
+    <td>서울특별시 강남구 논현로93길 6</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/커피중독" target="_blank">커피중독</a></td>
+    <td>서울특별시 강남구 테헤란로64길 14</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/갈레온" target="_blank">갈레온</a></td>
+    <td>서울특별시 강남구 테헤란로 309</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/만나식당" target="_blank">만나식당</a></td>
+    <td>서울특별시 강남구 선릉로87길 10</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/린츄" target="_blank">린츄</a></td>
+    <td>서울특별시 강남구 논현로85길 5-13</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아그라지에프씨" target="_blank">아그라지에프씨</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>베트남식 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/청년다방" target="_blank">청년다방</a></td>
+    <td>서울특별시 강남구 선릉로86길 31</td>
+    <td>김밥/만두/분식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/메이크샐러드" target="_blank">메이크샐러드</a></td>
+    <td>서울특별시 강남구 언주로98길 15</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우리돈삼이" target="_blank">우리돈삼이</a></td>
+    <td>서울특별시 강남구 테헤란로 147</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/비에이블스터디카페" target="_blank">비에이블스터디카페</a></td>
+    <td>서울특별시 강남구 선릉로62길 33</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더스노우대치" target="_blank">더스노우대치</a></td>
+    <td>서울특별시 강남구 선릉로76길 4</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/베레푸드서래향기세끼" target="_blank">베레푸드서래향기세끼</a></td>
+    <td>서울특별시 강남구 선릉로93길 18</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/선릉엘7해우리" target="_blank">선릉엘7해우리</a></td>
+    <td>서울특별시 강남구 테헤란로 415</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/지유가오카핫초메" target="_blank">지유가오카핫초메</a></td>
+    <td>서울특별시 강남구 테헤란로52길 16</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/배떡" target="_blank">배떡</a></td>
+    <td>서울특별시 강남구 언주로69길 16</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/재패니즈다이닝안심" target="_blank">재패니즈다이닝안심</a></td>
+    <td>서울특별시 강남구 언주로98길 9</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/그로브보틀" target="_blank">그로브보틀</a></td>
+    <td>서울특별시 강남구 언주로71길 19-3</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대왕통닭" target="_blank">대왕통닭</a></td>
+    <td>서울특별시 강남구 언주로98길 19</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/토종맛집" target="_blank">토종맛집</a></td>
+    <td>서울특별시 강남구 테헤란로 423</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아워홈네오플" target="_blank">아워홈네오플</a></td>
+    <td>서울특별시 강남구 테헤란로 201</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우리집김밥" target="_blank">우리집김밥</a></td>
+    <td>서울특별시 강남구 테헤란로51길 7</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/퍼플랩스" target="_blank">퍼플랩스</a></td>
+    <td>서울특별시 강남구 선릉로93길 40</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/군자대한곱창" target="_blank">군자대한곱창</a></td>
+    <td>서울특별시 강남구 선릉로86길 34</td>
+    <td>곱창 전골/구이</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제이오케이컴퍼니강남커피온리" target="_blank">제이오케이컴퍼니강남커피온리</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/쿠잉" target="_blank">쿠잉</a></td>
+    <td>서울특별시 강남구 언주로81길 6</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/터닝포인트" target="_blank">터닝포인트</a></td>
+    <td>서울특별시 강남구 테헤란로44길 8</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/뉴콘서트라이브" target="_blank">뉴콘서트라이브</a></td>
+    <td>서울특별시 강남구 선릉로82길 23</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/삼백집점" target="_blank">삼백집점</a></td>
+    <td>서울특별시 강남구 테헤란로39길 47</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마삼계탕역삼별관" target="_blank">마삼계탕역삼별관</a></td>
+    <td>서울특별시 강남구 언주로 337</td>
+    <td>닭/오리고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대원정" target="_blank">대원정</a></td>
+    <td>서울특별시 강남구 선릉로100길 56</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/김태완스시대치" target="_blank">김태완스시대치</a></td>
+    <td>서울특별시 강남구 선릉로64길 17</td>
+    <td>일식 회/초밥</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/동경강" target="_blank">동경강</a></td>
+    <td>서울특별시 강남구 테헤란로 134</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/르뺑드펭귄" target="_blank">르뺑드펭귄</a></td>
+    <td>서울특별시 강남구 언주로 420</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/유정삼겹" target="_blank">유정삼겹</a></td>
+    <td>서울특별시 강남구 테헤란로 418</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/옛날그맛명동칼국수" target="_blank">옛날그맛명동칼국수</a></td>
+    <td>서울특별시 강남구 역삼로37길 3</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/꿀스커피" target="_blank">꿀스커피</a></td>
+    <td>서울특별시 강남구 선릉로62길 32-2</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/레드락" target="_blank">레드락</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/에슬로우" target="_blank">에슬로우</a></td>
+    <td>서울특별시 강남구 테헤란로64길 14</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/두찜강남" target="_blank">두찜강남</a></td>
+    <td>서울특별시 강남구 선릉로64길 28</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제이돈까스" target="_blank">제이돈까스</a></td>
+    <td>서울특별시 강남구 언주로97길 7</td>
+    <td>경양식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우리다" target="_blank">우리다</a></td>
+    <td>서울특별시 강남구 테헤란로34길 14</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/뜸들이다" target="_blank">뜸들이다</a></td>
+    <td>서울특별시 강남구 테헤란로34길 14</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/소공푸드" target="_blank">소공푸드</a></td>
+    <td>서울특별시 강남구 선릉로82길 4</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/플레이버" target="_blank">플레이버</a></td>
+    <td>서울특별시 강남구 테헤란로55길 32</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/백년육일집" target="_blank">백년육일집</a></td>
+    <td>서울특별시 강남구 언주로 430</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/샤방샤방" target="_blank">샤방샤방</a></td>
+    <td>서울특별시 강남구 언주로 405</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/은행나무집" target="_blank">은행나무집</a></td>
+    <td>서울특별시 강남구 테헤란로53길 15-5</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/파머스빈" target="_blank">파머스빈</a></td>
+    <td>서울특별시 강남구 선릉로90길 56</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/커피베이강남" target="_blank">커피베이강남</a></td>
+    <td>서울특별시 강남구 선릉로100길 42</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카츠젠" target="_blank">카츠젠</a></td>
+    <td>서울특별시 강남구 선릉로86길 6</td>
+    <td>일식 회/초밥</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/내고향김치요리" target="_blank">내고향김치요리</a></td>
+    <td>서울특별시 강남구 테헤란로37길 23</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/김둘레순대국" target="_blank">김둘레순대국</a></td>
+    <td>서울특별시 강남구 테헤란로43길 19</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/핫브레드점" target="_blank">핫브레드점</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/후라토식당" target="_blank">후라토식당</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/호또치킨" target="_blank">호또치킨</a></td>
+    <td>서울특별시 강남구 언주로93길 32-3</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/남원추어탕" target="_blank">남원추어탕</a></td>
+    <td>서울특별시 강남구 테헤란로69길 16</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/촌돼지마을" target="_blank">촌돼지마을</a></td>
+    <td>서울특별시 강남구 테헤란로 329</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/흑다돈" target="_blank">흑다돈</a></td>
+    <td>서울특별시 강남구 선릉로93길 56</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/토속청국장" target="_blank">토속청국장</a></td>
+    <td>서울특별시 강남구 논현로85길 5-10</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/감동식혜" target="_blank">감동식혜</a></td>
+    <td>서울특별시 강남구 역삼로69길 5</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/케빈스보일링크랩" target="_blank">케빈스보일링크랩</a></td>
+    <td>서울특별시 강남구 언주로 420</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/북쌔즈" target="_blank">북쌔즈</a></td>
+    <td>서울특별시 강남구 테헤란로 311</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/안녕,제주" target="_blank">안녕,제주</a></td>
+    <td>서울특별시 강남구 언주로98길 17-3</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/담뿍화로된장언주로점" target="_blank">담뿍화로된장언주로점</a></td>
+    <td>서울특별시 강남구 언주로99길 9</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/엠+엠" target="_blank">엠+엠</a></td>
+    <td>서울특별시 강남구 봉은사로50길 18</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/트윗젤" target="_blank">트윗젤</a></td>
+    <td>서울특별시 강남구 테헤란로 340</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/엠파이어드레스" target="_blank">엠파이어드레스</a></td>
+    <td>서울특별시 강남구 테헤란로70길 14-10</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/옹기김밥" target="_blank">옹기김밥</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/해담채삼성" target="_blank">해담채삼성</a></td>
+    <td>서울특별시 강남구 테헤란로 504</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/연타발" target="_blank">연타발</a></td>
+    <td>서울특별시 강남구 테헤란로 428</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/거평식당" target="_blank">거평식당</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페그리다" target="_blank">카페그리다</a></td>
+    <td>서울특별시 강남구 테헤란로69길 14</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/테이블스" target="_blank">테이블스</a></td>
+    <td>서울특별시 강남구 논현로85길 52</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/생활맥주" target="_blank">생활맥주</a></td>
+    <td>서울특별시 강남구 언주로93길 34</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/베통 바이 멜로워" target="_blank">베통 바이 멜로워</a></td>
+    <td>서울특별시 강남구 테헤란로 128</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/동신식당" target="_blank">동신식당</a></td>
+    <td>서울특별시 강남구 언주로 314</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/강남본가가마골" target="_blank">강남본가가마골</a></td>
+    <td>서울특별시 강남구 테헤란로55길 28</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/해미심푸드" target="_blank">해미심푸드</a></td>
+    <td>서울특별시 강남구 언주로98길 22</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/부뚜막" target="_blank">부뚜막</a></td>
+    <td>서울특별시 강남구 테헤란로 313</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/종수네" target="_blank">종수네</a></td>
+    <td>서울특별시 강남구 언주로85길 23-12</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/국밥카페" target="_blank">국밥카페</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제이엔제이다이닝" target="_blank">제이엔제이다이닝</a></td>
+    <td>서울특별시 강남구 논현로85길 52</td>
+    <td>일식 회/초밥</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/로스팅팩토리" target="_blank">로스팅팩토리</a></td>
+    <td>서울특별시 강남구 언주로71길 7</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/풍경" target="_blank">풍경</a></td>
+    <td>서울특별시 강남구 테헤란로77길 11-16</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/별난횟집역삼" target="_blank">별난횟집역삼</a></td>
+    <td>서울특별시 강남구 언주로85길 25</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/바우한우" target="_blank">바우한우</a></td>
+    <td>서울특별시 강남구 선릉로89길 16</td>
+    <td>소고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우리참치정육점" target="_blank">우리참치정육점</a></td>
+    <td>서울특별시 강남구 언주로98길 16</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/웰하임" target="_blank">웰하임</a></td>
+    <td>서울특별시 강남구 언주로 432</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/전주한일관" target="_blank">전주한일관</a></td>
+    <td>서울특별시 강남구 언주로81길 57</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/감탄커피" target="_blank">감탄커피</a></td>
+    <td>서울특별시 강남구 테헤란로 522</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/여신김밥" target="_blank">여신김밥</a></td>
+    <td>서울특별시 강남구 선릉로90길 70</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/반룡산" target="_blank">반룡산</a></td>
+    <td>서울특별시 강남구 테헤란로78길 26</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우리샤브" target="_blank">우리샤브</a></td>
+    <td>서울특별시 강남구 언주로90길 6</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/리밍" target="_blank">리밍</a></td>
+    <td>서울특별시 강남구 테헤란로37길 27</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/중화요리일품" target="_blank">중화요리일품</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/스위트에삐" target="_blank">스위트에삐</a></td>
+    <td>서울특별시 강남구 선릉로64길 23</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/포삼팔" target="_blank">포삼팔</a></td>
+    <td>서울특별시 강남구 테헤란로 440</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/유썸" target="_blank">유썸</a></td>
+    <td>서울특별시 강남구 테헤란로 410</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/함초마을" target="_blank">함초마을</a></td>
+    <td>서울특별시 강남구 테헤란로 139</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/슬로우푸드" target="_blank">슬로우푸드</a></td>
+    <td>서울특별시 강남구 테헤란로51길 18</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이도감" target="_blank">이도감</a></td>
+    <td>서울특별시 강남구 테헤란로77길 11-12</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/남호식당" target="_blank">남호식당</a></td>
+    <td>서울특별시 강남구 논현로85길 23</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/해든정" target="_blank">해든정</a></td>
+    <td>서울특별시 강남구 언주로98길 35</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/석기정" target="_blank">석기정</a></td>
+    <td>서울특별시 강남구 언주로98길 35</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/힐튼제과" target="_blank">힐튼제과</a></td>
+    <td>서울특별시 강남구 언주로 317</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/참치그라" target="_blank">참치그라</a></td>
+    <td>서울특별시 강남구 선릉로93길 22</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제주몬트락" target="_blank">제주몬트락</a></td>
+    <td>서울특별시 강남구 선릉로64길 11-4</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/본죽" target="_blank">본죽</a></td>
+    <td>서울특별시 강남구 선릉로93길 26</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/클라우드" target="_blank">클라우드</a></td>
+    <td>서울특별시 강남구 언주로75길 16</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/사량도" target="_blank">사량도</a></td>
+    <td>서울특별시 강남구 역삼로33길 3</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/올어바웃카페강남상록회관점" target="_blank">올어바웃카페강남상록회관점</a></td>
+    <td>서울특별시 강남구 언주로 508</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/레드비틀" target="_blank">레드비틀</a></td>
+    <td>서울특별시 강남구 테헤란로53길 18</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/예림" target="_blank">예림</a></td>
+    <td>서울특별시 강남구 테헤란로 310</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/한국맥도날드" target="_blank">한국맥도날드</a></td>
+    <td>서울특별시 강남구 테헤란로 326</td>
+    <td>버거</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/일미리금계찜닭" target="_blank">일미리금계찜닭</a></td>
+    <td>서울특별시 강남구 선릉로93길 22</td>
+    <td>닭/오리고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마구로젠" target="_blank">마구로젠</a></td>
+    <td>서울특별시 강남구 논현로86길 32</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/갓텐스시" target="_blank">갓텐스시</a></td>
+    <td>서울특별시 강남구 테헤란로 109</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/꽃새우영번지" target="_blank">꽃새우영번지</a></td>
+    <td>서울특별시 강남구 언주로 536</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/한국맥도날드강남" target="_blank">한국맥도날드강남</a></td>
+    <td>서울특별시 강남구 테헤란로 107</td>
+    <td>버거</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/서초동연가" target="_blank">서초동연가</a></td>
+    <td>서울특별시 강남구 선릉로93길 12</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/매반생면" target="_blank">매반생면</a></td>
+    <td>서울특별시 강남구 언주로 508</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/메머드커피" target="_blank">메머드커피</a></td>
+    <td>서울특별시 강남구 테헤란로43길 12</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/사보텐" target="_blank">사보텐</a></td>
+    <td>서울특별시 강남구 테헤란로 316</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/한앤둘치킨" target="_blank">한앤둘치킨</a></td>
+    <td>서울특별시 강남구 선릉로93길 18</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/백수산" target="_blank">백수산</a></td>
+    <td>서울특별시 강남구 언주로93길 31</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/머물다" target="_blank">머물다</a></td>
+    <td>서울특별시 강남구 선릉로99길 12</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/부산양곱창" target="_blank">부산양곱창</a></td>
+    <td>서울특별시 강남구 언주로98길 8-1</td>
+    <td>곱창 전골/구이</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/조샌드위치앤커피" target="_blank">조샌드위치앤커피</a></td>
+    <td>서울특별시 강남구 테헤란로77길 13</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/화린" target="_blank">화린</a></td>
+    <td>서울특별시 강남구 역삼로65길 31</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/2001강남메밀엔돈가스" target="_blank">2001강남메밀엔돈가스</a></td>
+    <td>서울특별시 강남구 논현로85길 47</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/김밥까페역삼테헤란점" target="_blank">김밥까페역삼테헤란점</a></td>
+    <td>서울특별시 강남구 테헤란로34길 7</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/천사의섬" target="_blank">천사의섬</a></td>
+    <td>서울특별시 강남구 테헤란로70길 14-10</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/장호왕곱창" target="_blank">장호왕곱창</a></td>
+    <td>서울특별시 강남구 논현로85길 23</td>
+    <td>곱창 전골/구이</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/생어거스틴" target="_blank">생어거스틴</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>베트남식 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/수연이네분식" target="_blank">수연이네분식</a></td>
+    <td>서울특별시 강남구 봉은사로44길 1</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카사아지오" target="_blank">카사아지오</a></td>
+    <td>서울특별시 강남구 언주로93길 32-6</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/채근담" target="_blank">채근담</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/무등산" target="_blank">무등산</a></td>
+    <td>서울특별시 강남구 선릉로91길 18</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/부어치킨역삼스타" target="_blank">부어치킨역삼스타</a></td>
+    <td>서울특별시 강남구 논현로85길 33</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/딸부자네불백" target="_blank">딸부자네불백</a></td>
+    <td>서울특별시 강남구 테헤란로47길 8</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/한마음분식" target="_blank">한마음분식</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/연가" target="_blank">연가</a></td>
+    <td>서울특별시 강남구 선릉로93길 18</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/엄마손김밥" target="_blank">엄마손김밥</a></td>
+    <td>서울특별시 강남구 언주로 314</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/생태사랑" target="_blank">생태사랑</a></td>
+    <td>서울특별시 강남구 테헤란로51길 10</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대학로김가네김밥" target="_blank">대학로김가네김밥</a></td>
+    <td>서울특별시 강남구 언주로98길 18</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/탄선릉점" target="_blank">탄선릉점</a></td>
+    <td>서울특별시 강남구 언주로98길 20</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/혜정식당" target="_blank">혜정식당</a></td>
+    <td>서울특별시 강남구 선릉로93길 34</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/청목" target="_blank">청목</a></td>
+    <td>서울특별시 강남구 테헤란로 124</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/한솥도시락" target="_blank">한솥도시락</a></td>
+    <td>서울특별시 강남구 언주로 427</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/백암" target="_blank">백암</a></td>
+    <td>서울특별시 강남구 언주로97길 7</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/모모웨이" target="_blank">모모웨이</a></td>
+    <td>서울특별시 강남구 언주로 314</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/페리카나" target="_blank">페리카나</a></td>
+    <td>서울특별시 강남구 언주로 313</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/철판아르고" target="_blank">철판아르고</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/고대광실" target="_blank">고대광실</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/지리산흙돼지명가" target="_blank">지리산흙돼지명가</a></td>
+    <td>서울특별시 강남구 언주로85길 13</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/어람촌" target="_blank">어람촌</a></td>
+    <td>서울특별시 강남구 언주로98길 22</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페자스" target="_blank">카페자스</a></td>
+    <td>서울특별시 강남구 언주로 508</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/밥앤밥" target="_blank">밥앤밥</a></td>
+    <td>서울특별시 강남구 테헤란로53길 15-5</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/포베이" target="_blank">포베이</a></td>
+    <td>서울특별시 강남구 테헤란로43길 17</td>
+    <td>베트남식 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/유대감숯불갈비" target="_blank">유대감숯불갈비</a></td>
+    <td>서울특별시 강남구 언주로98길 33</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/남도낙지" target="_blank">남도낙지</a></td>
+    <td>서울특별시 강남구 언주로71길 19</td>
+    <td>해산물 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/땡초불닭발동대문엽기떡볶이" target="_blank">땡초불닭발동대문엽기떡볶이</a></td>
+    <td>서울특별시 강남구 언주로 323</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페드아마폴라" target="_blank">카페드아마폴라</a></td>
+    <td>서울특별시 강남구 언주로 510</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/고향집" target="_blank">고향집</a></td>
+    <td>서울특별시 강남구 테헤란로47길 17</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/옛고을장원김밥" target="_blank">옛고을장원김밥</a></td>
+    <td>서울특별시 강남구 테헤란로37길 28</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/강남푸드" target="_blank">강남푸드</a></td>
+    <td>서울특별시 강남구 언주로85길 23-12</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/곱창고" target="_blank">곱창고</a></td>
+    <td>서울특별시 강남구 논현로85길 47</td>
+    <td>곱창 전골/구이</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/역삼동북어집" target="_blank">역삼동북어집</a></td>
+    <td>서울특별시 강남구 논현로85길 5-14</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/솔마루" target="_blank">솔마루</a></td>
+    <td>서울특별시 강남구 언주로90길 12</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/도곡수산" target="_blank">도곡수산</a></td>
+    <td>서울특별시 강남구 선릉로63길 13</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/엔가와" target="_blank">엔가와</a></td>
+    <td>서울특별시 강남구 역삼로37길 3</td>
+    <td>일식 회/초밥</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마이다스" target="_blank">마이다스</a></td>
+    <td>서울특별시 강남구 언주로93길 32</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/청운각" target="_blank">청운각</a></td>
+    <td>서울특별시 강남구 언주로98길 21</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/커피십오일" target="_blank">커피십오일</a></td>
+    <td>서울특별시 강남구 테헤란로53길 21</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/도스" target="_blank">도스</a></td>
+    <td>서울특별시 강남구 테헤란로 317</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/강남목장" target="_blank">강남목장</a></td>
+    <td>서울특별시 강남구 논현로86길 34</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/메가커피지하도점" target="_blank">메가커피지하도점</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/시골밥상" target="_blank">시골밥상</a></td>
+    <td>서울특별시 강남구 테헤란로 313</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/반월당닭강정" target="_blank">반월당닭강정</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/죠샌드위치" target="_blank">죠샌드위치</a></td>
+    <td>서울특별시 강남구 논현로87길 41</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/연가" target="_blank">연가</a></td>
+    <td>서울특별시 강남구 논현로85길 5-13</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페포엠" target="_blank">카페포엠</a></td>
+    <td>서울특별시 강남구 언주로98길 32</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/스미즈" target="_blank">스미즈</a></td>
+    <td>서울특별시 강남구 언주로 431</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/백암왕순대" target="_blank">백암왕순대</a></td>
+    <td>서울특별시 강남구 논현로87길 41</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/미향" target="_blank">미향</a></td>
+    <td>서울특별시 강남구 논현로87길 41</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/영덕물회" target="_blank">영덕물회</a></td>
+    <td>서울특별시 강남구 테헤란로43길 28</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/포하이베트남쌀국수" target="_blank">포하이베트남쌀국수</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>베트남식 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/밥사랑" target="_blank">밥사랑</a></td>
+    <td>서울특별시 강남구 언주로 408</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제이엘푸드부산아지매국밥" target="_blank">제이엘푸드부산아지매국밥</a></td>
+    <td>서울특별시 강남구 논현로85길 5-3</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/토마토피자" target="_blank">토마토피자</a></td>
+    <td>서울특별시 강남구 테헤란로39길 65</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/원조우리생태찌게" target="_blank">원조우리생태찌게</a></td>
+    <td>서울특별시 강남구 테헤란로43길 27</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/란수사" target="_blank">란수사</a></td>
+    <td>서울특별시 강남구 언주로93길 14-3</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/와비사비" target="_blank">와비사비</a></td>
+    <td>서울특별시 강남구 언주로93길 16</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/할스" target="_blank">할스</a></td>
+    <td>서울특별시 강남구 언주로93길 32-8</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/유썸퀴즈노스" target="_blank">유썸퀴즈노스</a></td>
+    <td>서울특별시 강남구 테헤란로 230</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/천용" target="_blank">천용</a></td>
+    <td>서울특별시 강남구 언주로90길 12</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/다향" target="_blank">다향</a></td>
+    <td>서울특별시 강남구 테헤란로 313</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/투뿔한우" target="_blank">투뿔한우</a></td>
+    <td>서울특별시 강남구 선릉로63길 7</td>
+    <td>소고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/미각상점" target="_blank">미각상점</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/남원추어탕" target="_blank">남원추어탕</a></td>
+    <td>서울특별시 강남구 선릉로89길 7</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/컴포즈커피사점" target="_blank">컴포즈커피사점</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/국민전통갈비미소그릴" target="_blank">국민전통갈비미소그릴</a></td>
+    <td>서울특별시 강남구 테헤란로39길 41</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/산야로" target="_blank">산야로</a></td>
+    <td>서울특별시 강남구 언주로87길 9</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/동해수산" target="_blank">동해수산</a></td>
+    <td>서울특별시 강남구 선릉로93길 18</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/선릉김밥" target="_blank">선릉김밥</a></td>
+    <td>서울특별시 강남구 선릉로94길 3</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/예향" target="_blank">예향</a></td>
+    <td>서울특별시 강남구 테헤란로 124</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/시나브로" target="_blank">시나브로</a></td>
+    <td>서울특별시 강남구 논현로85길 71</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/여수바다장어" target="_blank">여수바다장어</a></td>
+    <td>서울특별시 강남구 테헤란로47길 17</td>
+    <td>해산물 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/본도시락역삼초교점" target="_blank">본도시락역삼초교점</a></td>
+    <td>서울특별시 강남구 논현로85길 52</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/양자강" target="_blank">양자강</a></td>
+    <td>서울특별시 강남구 테헤란로34길 7</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/가덕도횟집" target="_blank">가덕도횟집</a></td>
+    <td>서울특별시 강남구 언주로81길 13</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/황우양대창" target="_blank">황우양대창</a></td>
+    <td>서울특별시 강남구 언주로98길 5</td>
+    <td>곱창 전골/구이</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대성호프" target="_blank">대성호프</a></td>
+    <td>서울특별시 강남구 언주로 323</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/고흥족발" target="_blank">고흥족발</a></td>
+    <td>서울특별시 강남구 선릉로63길 7</td>
+    <td>족발/보쌈</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/빅컵커피" target="_blank">빅컵커피</a></td>
+    <td>서울특별시 강남구 논현로87길 41</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제주도야지빵경이네" target="_blank">제주도야지빵경이네</a></td>
+    <td>서울특별시 강남구 테헤란로39길 40</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/선릉순대집" target="_blank">선릉순대집</a></td>
+    <td>서울특별시 강남구 언주로98길 26</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/진수사" target="_blank">진수사</a></td>
+    <td>서울특별시 강남구 테헤란로37길 13-7</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마시리" target="_blank">마시리</a></td>
+    <td>서울특별시 강남구 언주로97길 12</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/무한장어" target="_blank">무한장어</a></td>
+    <td>서울특별시 강남구 선릉로99길 5</td>
+    <td>해산물 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/파리바게뜨" target="_blank">파리바게뜨</a></td>
+    <td>서울특별시 강남구 언주로 311</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/병천순대" target="_blank">병천순대</a></td>
+    <td>서울특별시 강남구 언주로98길 9</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/신가네솥뚜껑볶음밥" target="_blank">신가네솥뚜껑볶음밥</a></td>
+    <td>서울특별시 강남구 테헤란로 147</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대가참맛" target="_blank">대가참맛</a></td>
+    <td>서울특별시 강남구 선릉로92길 42</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/정동진" target="_blank">정동진</a></td>
+    <td>서울특별시 강남구 언주로98길 17</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/기장꼼장어" target="_blank">기장꼼장어</a></td>
+    <td>서울특별시 강남구 언주로85길 13</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/위로스트커피" target="_blank">위로스트커피</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/동해식당" target="_blank">동해식당</a></td>
+    <td>서울특별시 강남구 언주로94길 9-3</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/꿀때기" target="_blank">꿀때기</a></td>
+    <td>서울특별시 강남구 역삼로63길 13</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/엘리야라이브" target="_blank">엘리야라이브</a></td>
+    <td>서울특별시 강남구 언주로98길 8-2</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/홋카이도여보" target="_blank">홋카이도여보</a></td>
+    <td>서울특별시 강남구 언주로98길 15</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/속초코다리냉면" target="_blank">속초코다리냉면</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/엘팔알레이터" target="_blank">엘팔알레이터</a></td>
+    <td>서울특별시 강남구 테헤란로38길 40-8</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/육해전" target="_blank">육해전</a></td>
+    <td>서울특별시 강남구 테헤란로33길 23</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/모닝테이블" target="_blank">모닝테이블</a></td>
+    <td>서울특별시 강남구 언주로 305</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우밀가" target="_blank">우밀가</a></td>
+    <td>서울특별시 강남구 선릉로93길 26</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오발탄" target="_blank">오발탄</a></td>
+    <td>서울특별시 강남구 논현로86길 12</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/누구나홀닥반한닭" target="_blank">누구나홀닥반한닭</a></td>
+    <td>서울특별시 강남구 선릉로93길 7</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/베이징코야" target="_blank">베이징코야</a></td>
+    <td>서울특별시 강남구 논현로86길 20</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제이엠엔케이" target="_blank">제이엠엔케이</a></td>
+    <td>서울특별시 강남구 테헤란로64길 14</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/빌리엔젤신라스테이" target="_blank">빌리엔젤신라스테이</a></td>
+    <td>서울특별시 강남구 언주로 517</td>
+    <td>빵/도넛</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/해담채강남" target="_blank">해담채강남</a></td>
+    <td>서울특별시 강남구 논현로85길 70</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/후앤파트너스" target="_blank">후앤파트너스</a></td>
+    <td>서울특별시 강남구 테헤란로 152</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/더삼다" target="_blank">더삼다</a></td>
+    <td>서울특별시 강남구 논현로86길 28</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/국제시장해장국" target="_blank">국제시장해장국</a></td>
+    <td>서울특별시 강남구 선릉로86길 42</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/셀렉커피랩" target="_blank">셀렉커피랩</a></td>
+    <td>서울특별시 강남구 테헤란로39길 50</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/와인컬렉터" target="_blank">와인컬렉터</a></td>
+    <td>서울특별시 강남구 테헤란로 329</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/팔로우스타" target="_blank">팔로우스타</a></td>
+    <td>서울특별시 강남구 테헤란로78길 16</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/엔제이키친" target="_blank">엔제이키친</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/꽃티움" target="_blank">꽃티움</a></td>
+    <td>서울특별시 강남구 역삼로69길 5</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/춘이네닭도리탕" target="_blank">춘이네닭도리탕</a></td>
+    <td>서울특별시 강남구 역삼로63길 20</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/라이스쉐프" target="_blank">라이스쉐프</a></td>
+    <td>서울특별시 강남구 테헤란로 518</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/모터시티바이매니멀역삼" target="_blank">모터시티바이매니멀역삼</a></td>
+    <td>서울특별시 강남구 테헤란로 142</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/모찌모찌브레드" target="_blank">모찌모찌브레드</a></td>
+    <td>서울특별시 강남구 언주로 314</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/설빙" target="_blank">설빙</a></td>
+    <td>서울특별시 강남구 테헤란로52길 17</td>
+    <td>아이스크림/빙수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/유가네중식패스트푸드" target="_blank">유가네중식패스트푸드</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/꼬밥꼬밥" target="_blank">꼬밥꼬밥</a></td>
+    <td>서울특별시 강남구 언주로 314</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/스타커피" target="_blank">스타커피</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/OPH센터필드점오리지널팬케이크하우스" target="_blank">OPH센터필드점오리지널팬케이크하우스</a></td>
+    <td>서울특별시 강남구 테헤란로 231</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/지구당역삼두꺼비빌딩점" target="_blank">지구당역삼두꺼비빌딩점</a></td>
+    <td>서울특별시 강남구 테헤란로 310</td>
+    <td>백반/한정식</td>
+</tr>
+
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대구뽈지리탕" target="_blank">대구뽈지리탕</a></td>
+    <td>서울특별시 강남구 논현로85길 57</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/버닝스톤" target="_blank">버닝스톤</a></td>
+    <td>서울특별시 강남구 역삼로64길 7</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/어니스트커피" target="_blank">어니스트커피</a></td>
+    <td>서울특별시 강남구 언주로98길 16</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/파머스빈" target="_blank">파머스빈</a></td>
+    <td>서울특별시 강남구 테헤란로 313</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/포리듬" target="_blank">포리듬</a></td>
+    <td>서울특별시 강남구 논현로86길 34</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/빽다방선릉역" target="_blank">빽다방선릉역</a></td>
+    <td>서울특별시 강남구 테헤란로51길 10</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/퐈이어스시" target="_blank">퐈이어스시</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/복돈이순대국육회해물포차" target="_blank">복돈이순대국육회해물포차</a></td>
+    <td>서울특별시 강남구 테헤란로37길 22</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/소풍" target="_blank">소풍</a></td>
+    <td>서울특별시 강남구 테헤란로34길 14</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/공차강남역점" target="_blank">공차강남역점</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/올라에셋" target="_blank">올라에셋</a></td>
+    <td>서울특별시 강남구 테헤란로 423</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/송" target="_blank">송</a></td>
+    <td>서울특별시 강남구 선릉로76길 27</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/풍천장어전문" target="_blank">풍천장어전문</a></td>
+    <td>서울특별시 강남구 언주로 408</td>
+    <td>해산물 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/음마" target="_blank">음마</a></td>
+    <td>서울특별시 강남구 언주로98길 20</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/단초식당" target="_blank">단초식당</a></td>
+    <td>서울특별시 강남구 역삼로69길 27</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이모네식당" target="_blank">이모네식당</a></td>
+    <td>서울특별시 강남구 테헤란로 329</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/매머드익스프레스선릉성원빌딩앞점" target="_blank">매머드익스프레스선릉성원빌딩앞점</a></td>
+    <td>서울특별시 강남구 선릉로94길 3</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/땡기면,땡비어" target="_blank">땡기면,땡비어</a></td>
+    <td>서울특별시 강남구 테헤란로34길 10</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/커피스니퍼" target="_blank">커피스니퍼</a></td>
+    <td>서울특별시 강남구 테헤란로 231</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/냠냠족발&보쌈강남" target="_blank">냠냠족발&보쌈강남</a></td>
+    <td>서울특별시 강남구 언주로103길 27</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/투썸플레이스역삼" target="_blank">투썸플레이스역삼</a></td>
+    <td>서울특별시 강남구 언주로 419</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/피슈마라홍탕" target="_blank">피슈마라홍탕</a></td>
+    <td>서울특별시 강남구 역삼로63길 14</td>
+    <td>마라탕/훠궈</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/세광양대창" target="_blank">세광양대창</a></td>
+    <td>서울특별시 강남구 역삼로63길 23</td>
+    <td>곱창 전골/구이</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/나래비" target="_blank">나래비</a></td>
+    <td>서울특별시 강남구 테헤란로 310</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/10번가고깃집앤드쉐프의부대찌개" target="_blank">10번가고깃집앤드쉐프의부대찌개</a></td>
+    <td>서울특별시 강남구 선릉로91길 14</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/캘리스코타코벨" target="_blank">캘리스코타코벨</a></td>
+    <td>서울특별시 강남구 논현로85길 11</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/일품향" target="_blank">일품향</a></td>
+    <td>서울특별시 강남구 선릉로64길 5</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/수준이다른치킨" target="_blank">수준이다른치킨</a></td>
+    <td>서울특별시 강남구 테헤란로55길 17</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/뇸베이커리" target="_blank">뇸베이커리</a></td>
+    <td>서울특별시 강남구 언주로69길 6</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/박사부" target="_blank">박사부</a></td>
+    <td>서울특별시 강남구 테헤란로52길 15</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제이지에스" target="_blank">제이지에스</a></td>
+    <td>서울특별시 강남구 선릉로93길 31</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/갓포아키" target="_blank">갓포아키</a></td>
+    <td>서울특별시 강남구 테헤란로 610</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/고피자한티역점" target="_blank">고피자한티역점</a></td>
+    <td>서울특별시 강남구 선릉로64길 7</td>
+    <td>피자</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/도시와사람들" target="_blank">도시와사람들</a></td>
+    <td>서울특별시 강남구 역삼로37길 9</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/김밥친구들" target="_blank">김밥친구들</a></td>
+    <td>서울특별시 강남구 테헤란로 340</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/가거도" target="_blank">가거도</a></td>
+    <td>서울특별시 강남구 테헤란로78길 14-6</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/싸움의고수한티역점" target="_blank">싸움의고수한티역점</a></td>
+    <td>서울특별시 강남구 선릉로64길 6</td>
+    <td>족발/보쌈</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제이피강남" target="_blank">제이피강남</a></td>
+    <td>서울특별시 강남구 테헤란로52길 15</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/빈티지935" target="_blank">빈티지935</a></td>
+    <td>서울특별시 강남구 선릉로62길 27-5</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/쥬스식스" target="_blank">쥬스식스</a></td>
+    <td>서울특별시 강남구 테헤란로 107-2</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/전셰프의부페플러스" target="_blank">전셰프의부페플러스</a></td>
+    <td>서울특별시 강남구 테헤란로78길 16</td>
+    <td>뷔페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/봉추찜닭강남358" target="_blank">봉추찜닭강남358</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>닭/오리고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우시야" target="_blank">우시야</a></td>
+    <td>서울특별시 강남구 역삼로37길 7</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/피그인더가든" target="_blank">피그인더가든</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페드리옹" target="_blank">카페드리옹</a></td>
+    <td>서울특별시 강남구 언주로98길 36</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/브롱스" target="_blank">브롱스</a></td>
+    <td>서울특별시 강남구 선릉로82길 23</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/피자송" target="_blank">피자송</a></td>
+    <td>서울특별시 강남구 언주로71길 5-10</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/칸틴" target="_blank">칸틴</a></td>
+    <td>서울특별시 강남구 언주로 428</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/헤일리스커피" target="_blank">헤일리스커피</a></td>
+    <td>서울특별시 강남구 역삼로37길 11</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/슬기로운회사밥상" target="_blank">슬기로운회사밥상</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/네모오징어" target="_blank">네모오징어</a></td>
+    <td>서울특별시 강남구 언주로98길 31</td>
+    <td>횟집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오케이스시" target="_blank">오케이스시</a></td>
+    <td>서울특별시 강남구 테헤란로 231</td>
+    <td>일식 회/초밥</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/맛있는집밥" target="_blank">맛있는집밥</a></td>
+    <td>서울특별시 강남구 선릉로89길 7</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/일인치" target="_blank">일인치</a></td>
+    <td>서울특별시 강남구 언주로97길 7</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/과일파는싱싱카페" target="_blank">과일파는싱싱카페</a></td>
+    <td>서울특별시 강남구 언주로 408</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/커피사피엔스역삼" target="_blank">커피사피엔스역삼</a></td>
+    <td>서울특별시 강남구 논현로85길 52</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/목석화수" target="_blank">목석화수</a></td>
+    <td>서울특별시 강남구 테헤란로 428</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/코푸인터내셔널" target="_blank">코푸인터내셔널</a></td>
+    <td>서울특별시 강남구 테헤란로 147</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/본도시락" target="_blank">본도시락</a></td>
+    <td>서울특별시 강남구 선릉로82길 5</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/서울집" target="_blank">서울집</a></td>
+    <td>서울특별시 강남구 언주로93길 22-3</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/케이엔커피" target="_blank">케이엔커피</a></td>
+    <td>서울특별시 강남구 선릉로96길 5-6</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/예술상회냉동삼겹살" target="_blank">예술상회냉동삼겹살</a></td>
+    <td>서울특별시 강남구 선릉로91길 18</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/커피에반하다역삼디오빌점" target="_blank">커피에반하다역삼디오빌점</a></td>
+    <td>서울특별시 강남구 언주로 427</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/1977소곱창" target="_blank">1977소곱창</a></td>
+    <td>서울특별시 강남구 테헤란로53길 15-3</td>
+    <td>곱창 전골/구이</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아리스타" target="_blank">아리스타</a></td>
+    <td>서울특별시 강남구 테헤란로43길 10</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/만랩커피" target="_blank">만랩커피</a></td>
+    <td>서울특별시 강남구 논현로85길 52</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/와뱅" target="_blank">와뱅</a></td>
+    <td>서울특별시 강남구 언주로 535</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/열정국밥" target="_blank">열정국밥</a></td>
+    <td>서울특별시 강남구 역삼로37길 9</td>
+    <td>국/탕/찌개류</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/타이완벤땅" target="_blank">타이완벤땅</a></td>
+    <td>서울특별시 강남구 논현로85길 52</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마시명가지산갈비" target="_blank">마시명가지산갈비</a></td>
+    <td>서울특별시 강남구 선릉로82길 25</td>
+    <td>돼지고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/싸리골" target="_blank">싸리골</a></td>
+    <td>서울특별시 강남구 선릉로86길 24</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/라이브러리" target="_blank">라이브러리</a></td>
+    <td>서울특별시 강남구 언주로93길 32-3</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/조선커피" target="_blank">조선커피</a></td>
+    <td>서울특별시 강남구 논현로85길 13</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/매화램양꼬치" target="_blank">매화램양꼬치</a></td>
+    <td>서울특별시 강남구 언주로85길 13</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/레이어스튜디오" target="_blank">레이어스튜디오</a></td>
+    <td>서울특별시 강남구 역삼로63길 19</td>
+    <td>카페</td>
+</tr>
+
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마라공방포스코" target="_blank">마라공방포스코</a></td>
+    <td>서울특별시 강남구 테헤란로 440</td>
+    <td>마라탕/훠궈</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/진지방순대국직화닭갈비" target="_blank">진지방순대국직화닭갈비</a></td>
+    <td>서울특별시 강남구 테헤란로33길 19</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/개미집" target="_blank">개미집</a></td>
+    <td>서울특별시 강남구 선릉로86길 38</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/아즈랩" target="_blank">아즈랩</a></td>
+    <td>서울특별시 강남구 테헤란로37길 27</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/오시오식당" target="_blank">오시오식당</a></td>
+    <td>서울특별시 강남구 언주로 313</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/대박한쌈" target="_blank">대박한쌈</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/강남진짜찐차돌" target="_blank">강남진짜찐차돌</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/20년전통김덕자김치찌개김치찜" target="_blank">20년전통김덕자김치찌개김치찜</a></td>
+    <td>서울특별시 강남구 테헤란로57길 16</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/심플로우" target="_blank">심플로우</a></td>
+    <td>서울특별시 강남구 테헤란로52길 16</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/마이니치라멘" target="_blank">마이니치라멘</a></td>
+    <td>서울특별시 강남구 언주로85길 13</td>
+    <td>일식 면 요리</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/김바라김밥" target="_blank">김바라김밥</a></td>
+    <td>서울특별시 강남구 선릉로72길 34</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/실버빈" target="_blank">실버빈</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/하루" target="_blank">하루</a></td>
+    <td>서울특별시 강남구 언주로85길 24</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/삼청골명가더수제비" target="_blank">삼청골명가더수제비</a></td>
+    <td>서울특별시 강남구 언주로98길 25</td>
+    <td>국수/칼국수</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/알짜" target="_blank">알짜</a></td>
+    <td>서울특별시 강남구 테헤란로 333</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/토담밀면&국밥" target="_blank">토담밀면&국밥</a></td>
+    <td>서울특별시 강남구 테헤란로 504</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/만선" target="_blank">만선</a></td>
+    <td>서울특별시 강남구 테헤란로77길 9</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/루벤스" target="_blank">루벤스</a></td>
+    <td>서울특별시 강남구 언주로93길 22-2</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/지져스커피총회본부점" target="_blank">지져스커피총회본부점</a></td>
+    <td>서울특별시 강남구 테헤란로64길 19</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/토핑폭탄김치찜&김치찌개" target="_blank">토핑폭탄김치찜&김치찌개</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/시크릿보울" target="_blank">시크릿보울</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/벨" target="_blank">벨</a></td>
+    <td>서울특별시 강남구 선릉로86길 15</td>
+    <td>생맥주 전문</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/산타카페" target="_blank">산타카페</a></td>
+    <td>서울특별시 강남구 선릉로72길 13</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/쉘위디저트" target="_blank">쉘위디저트</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/동경규동한티역점" target="_blank">동경규동한티역점</a></td>
+    <td>서울특별시 강남구 선릉로64길 14</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/토핑킹김치찌개&김치찜" target="_blank">토핑킹김치찌개&김치찜</a></td>
+    <td>서울특별시 강남구 테헤란로57길 16</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/밀각" target="_blank">밀각</a></td>
+    <td>서울특별시 강남구 선릉로64길 24</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우미야" target="_blank">우미야</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/청기와타운" target="_blank">청기와타운</a></td>
+    <td>서울특별시 강남구 테헤란로64길 24</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/수라선" target="_blank">수라선</a></td>
+    <td>서울특별시 강남구 언주로 517</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/메가엠지씨커피역삼대로점" target="_blank">메가엠지씨커피역삼대로점</a></td>
+    <td>서울특별시 강남구 테헤란로 216</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/귀한사람들" target="_blank">귀한사람들</a></td>
+    <td>서울특별시 강남구 선릉로93길 17</td>
+    <td>백반/한정식</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/디어젤라또" target="_blank">디어젤라또</a></td>
+    <td>서울특별시 강남구 역삼로64길 22</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/남해안집" target="_blank">남해안집</a></td>
+    <td>서울특별시 강남구 논현로85길 29</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/1키로탕수육" target="_blank">1키로탕수육</a></td>
+    <td>서울특별시 강남구 봉은사로44길 36</td>
+    <td>중국집</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/엄마손김치찜&김치찌개" target="_blank">엄마손김치찜&김치찌개</a></td>
+    <td>서울특별시 강남구 테헤란로57길 16</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/쌀국수공방" target="_blank">쌀국수공방</a></td>
+    <td>서울특별시 강남구 테헤란로 310</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/피에스타타코&부리또" target="_blank">피에스타타코&부리또</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/깐부치킨" target="_blank">깐부치킨</a></td>
+    <td>서울특별시 강남구 선릉로94길 11</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/카페큐릉" target="_blank">카페큐릉</a></td>
+    <td>서울특별시 강남구 테헤란로52길 21</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/홍미단" target="_blank">홍미단</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/선향정샤브샤브" target="_blank">선향정샤브샤브</a></td>
+    <td>서울특별시 강남구 선릉로90길 72</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/으뜸김치찜" target="_blank">으뜸김치찜</a></td>
+    <td>서울특별시 강남구 테헤란로 123</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/프레시크레딧" target="_blank">프레시크레딧</a></td>
+    <td>서울특별시 강남구 테헤란로70길 12</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/슬로우캘리" target="_blank">슬로우캘리</a></td>
+    <td>서울특별시 강남구 논현로85길 52</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/진장수미역" target="_blank">진장수미역</a></td>
+    <td>서울특별시 강남구 언주로90길 8</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/한신짜장" target="_blank">한신짜장</a></td>
+    <td>서울특별시 강남구 테헤란로 322</td>
+    <td>중국집</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/나이스샤워" target="_blank">나이스샤워</a></td>
+    <td>서울특별시 강남구 선릉로86길 26</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이차돌강남" target="_blank">이차돌강남</a></td>
+    <td>서울특별시 강남구 선릉로86길 24</td>
+    <td>소고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/강남푸드코트할모니손맛" target="_blank">강남푸드코트할모니손맛</a></td>
+    <td>서울특별시 강남구 선릉로63길 13</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/슬로우앤로우" target="_blank">슬로우앤로우</a></td>
+    <td>서울특별시 강남구 언주로85길 32</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/세호해장국" target="_blank">세호해장국</a></td>
+    <td>서울특별시 강남구 봉은사로44길 81</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/창화당" target="_blank">창화당</a></td>
+    <td>서울특별시 강남구 역삼로63길 6</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/알렉산더커피" target="_blank">알렉산더커피</a></td>
+    <td>서울특별시 강남구 테헤란로51길 23</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/직화배기" target="_blank">직화배기</a></td>
+    <td>서울특별시 강남구 테헤란로 329</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/칠프로칠백식당" target="_blank">칠프로칠백식당역삼</a></td>
+    <td>서울특별시 강남구 테헤란로38길 27</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/리포샹떼" target="_blank">리포샹떼</a></td>
+    <td>서울특별시 강남구 봉은사로44길 54</td>
+    <td>카페</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/트웬티아워스" target="_blank">트웬티아워스</a></td>
+    <td>서울특별시 강남구 테헤란로 101</td>
+    <td>카페</td>
+</tr>
+
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/이니스와플" target="_blank">이니스와플</a></td>
+    <td>서울특별시 강남구 테헤란로55길 24</td>
+    <td>피자</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/킹케밥" target="_blank">킹케밥</a></td>
+    <td>서울특별시 강남구 테헤란로 440</td>
+    <td>경양식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/비에이치씨역삼" target="_blank">비에이치씨역삼</a></td>
+    <td>서울특별시 강남구 언주로69길 17</td>
+    <td>치킨</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/제주옥탑" target="_blank">제주옥탑</a></td>
+    <td>서울특별시 강남구 선릉로86길 16</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://place.map.kakao.com/1871199705" target="_blank">곤트란쉐리에</a></td>
+    <td>서울특별시 강남구 테헤란로52길 6</td>
+    <td>빵/도넛</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/강남푸드코트한돈김치찜" target="_blank">강남푸드코트한돈김치찜</a></td>
+    <td>서울특별시 강남구 선릉로63길 13</td>
+    <td>국/탕/찌개류</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/감성족발" target="_blank">감성족발</a></td>
+    <td>서울특별시 강남구 선릉로86길 26</td>
+    <td>족발/보쌈</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/강남푸드코트" target="_blank">강남푸드코트</a></td>
+    <td>서울특별시 강남구 선릉로63길 13</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/트레조" target="_blank">트레조</a></td>
+    <td>서울특별시 강남구 테헤란로63길 9</td>
+    <td>백반/한정식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/우리할매떡볶이" target="_blank">우리할매떡볶이</a></td>
+    <td>서울특별시 강남구 테헤란로53길 21</td>
+    <td>김밥/만두/분식</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/소담한우" target="_blank">소담한우</a></td>
+    <td>서울특별시 강남구 언주로98길 21</td>
+    <td>소고기 구이/찜</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/90카츠" target="_blank">90카츠</a></td>
+    <td>서울특별시 강남구 선릉로72길 34</td>
+    <td>일식 회/초밥</td>
+</tr>
+<tr class="clickable-row" data-href="#link">
+    <td><a href="https://map.naver.com/v5/search/동산분식" target="_blank">동산분식</a></td>
+    <td>서울특별시 강남구 테헤란로70길 16</td>
+    <td>김밥/만두/분식</td>
+</tr>
+		
+	</tbody>
+</table>
+</div>
+
+</body></html>
